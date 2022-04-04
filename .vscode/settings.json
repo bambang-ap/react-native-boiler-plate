@@ -1,0 +1,74 @@
+{
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.validate": ["javascriptreact"],
+  "cSpell.words": [
+    "awsconfig",
+    "awsmobile",
+    "browserslist",
+    "cognito",
+    "cond",
+    "cors",
+    "datagrid",
+    "Datepicker",
+    "dotenv",
+    "dropzone",
+    "escpos",
+    "flashcoffee",
+    "gopay",
+    "inboxs",
+    "keychain",
+    "libphonenumber",
+    "lsquo",
+    "nestjs",
+    "nestjsx",
+    "nodemon",
+    "noredirect",
+    "openid",
+    "payement",
+    "persistedstate",
+    "phonenumber",
+    "postgres",
+    "precommit",
+    "randomstring",
+    "Recoilvalue",
+    "signin",
+    "signup",
+    "sofyan",
+    "timeago",
+    "typeorm",
+    "unmount",
+    "user",
+    "uuid",
+    "uuidv",
+    "vuetify",
+    "vuex",
+    "websockets"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnSave": true,
+  "eslint.enable": true,
+  "files.autoSave": "onFocusChange",
+  "javascript.preferences.quoteStyle": "single",
+  "prettier.configPath": ".prettierrc.js",
+  "eslint.nodePath": ".eslintrc.js",
+  "prettier.packageManager": "yarn",
+  "auto-rename-tag.activationOnLanguage": ["*"],
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "typescript.preferences.quoteStyle": "single",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "files.eol": "\n",
+}
