@@ -14,7 +14,7 @@ module.exports = {
 		es6: true,
 	},
 	extends: ['@react-native-community', 'airbnb-typescript', 'prettier'],
-	plugins: ['eslint-plugin-import-helpers'],
+	plugins: ['import', 'eslint-plugin-import-helpers'],
 	parserOptions: {
 		ecmaFeatures: {
 			jsx: true,
@@ -33,6 +33,7 @@ module.exports = {
 				leadingUnderscore: 'allow',
 			},
 		],
+		'@typescript-eslint/object-curly-spacing': 0,
 		'@typescript-eslint/indent': 0,
 		'import/prefer-default-export': 0,
 		'react/jsx-curly-newline': 0,

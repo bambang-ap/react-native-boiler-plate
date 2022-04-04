@@ -22,7 +22,7 @@
       "@recoils/*": ["./recoils/*"],
       "@services/*": ["./services/*"],
       "@screens/*": ["./screens/*"],
-      "@utils/*": ["./utils/*"],
+      "@utils/*": ["./utils/*"]
     },
     "outDir": "dist",
     "allowSyntheticDefaultImports": true,

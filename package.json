@@ -12,7 +12,8 @@
   "dependencies": {
     "global-methods": "bambang-ap/global-methods#1.0.2",
     "react": "17.0.2",
-    "react-native": "0.66.4"
+    "react-native": "0.66.4",
+    "recoil": "0.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -24,6 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
     "babel-jest": "^26.6.3",
+    "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^7.14.0",
     "eslint-config-airbnb-typescript": "^16.2.0",
     "eslint-plugin-import": "^2.25.4",
