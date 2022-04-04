@@ -1,9 +1,8 @@
-/**
- * @format
- */
-
 import {AppRegistry} from 'react-native';
-import App from './src/App';
-import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => App);
+import appJson from './app.json';
+import App from './src/App';
+
+import 'global-methods';
+
+AppRegistry.registerComponent(appJson.name, () => App);
