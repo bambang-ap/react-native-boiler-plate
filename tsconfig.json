@@ -22,8 +22,8 @@
       "@recoils/*": ["./recoils/*"],
       "@services/*": ["./services/*"],
       "@screens/*": ["./screens/*"],
-      "@type/*": ["./types/*"],
-      "@utils/*": ["./utils/*"]
+      "@utils/*": ["./utils/*"],
+      "@interfaces/*": ["./types/*"]
     },
     "outDir": "dist",
     "allowSyntheticDefaultImports": true,

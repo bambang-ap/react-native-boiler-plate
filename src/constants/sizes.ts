@@ -6,7 +6,7 @@ import getFlexibleStyled from 'react-native-styled-px2dp';
 const {width} = Dimensions.get('screen');
 
 const {px2dp} = getFlexibleStyled({
-	designWidth: width * (isTablet() ? 0.5 : 1),
+	designWidth: width * (isTablet() ? 0.75 : 1),
 });
 
 const sizeModifier = (size: number) => px2dp(size);

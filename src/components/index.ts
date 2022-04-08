@@ -1,0 +1,94 @@
+import {ViewProps as RNViewProps} from 'react-native';
+
+import styled from 'styled-components/native';
+
+import {COLORS} from '@constants/colors';
+import {SIZES} from '@constants/sizes';
+import {TYPOGRAPHY, typographyStyle} from '@constants/typography';
+import {
+	Flex,
+	Size,
+	FlexBox,
+	Position,
+	TextAlign,
+	getFlexBox,
+} from '@interfaces/flexBox.type';
+
+export * from './Input';
+export * from './Button';
+
+export type BgColor = {backgroundColor?: COLORS};
+export type TextVariant = {variant?: TYPOGRAPHY};
+
+type TextProps = Omit<Flex, 'row' | 'col'> &
+	Size &
+	BgColor &
+	TextAlign &
+	Position &
+	TextVariant;
+
+export const Text = styled.Text<TextProps>(({backgroundColor, ...props}) => {
+	const {flexBoxStyleProps, restProps} = getFlexBox(props);
+	const {textAlign, ...rest} = flexBoxStyleProps ?? {};
+	const {variant} = restProps ?? {};
+	return {
+		...rest,
+		...typographyStyle(variant),
+		backgroundColor,
+	};
+});
+
+type ViewPropsAdditional = FlexBox & BgColor;
+export type ViewProps = ViewPropsAdditional & RNViewProps;
+
+export const View = styled.View<ViewPropsAdditional>(
+	({backgroundColor, ...props}) => {
+		const {flexBoxStyleProps} = getFlexBox(props);
+		const {textAlign, ...rest} = flexBoxStyleProps ?? {};
+		return {
+			...rest,
+			backgroundColor,
+		};
+	},
+);
+
+export const Container = styled(View)({
+	flex: 1,
+});
+
+export const Body = styled(View)({
+	flex: 1,
+	padding: SIZES.content,
+});
+
+export const Wrapper = styled(View)({
+	flexDirection: 'row',
+	justifyContent: 'space-between',
+});
+
+type Boxes = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
+type BoxSpaceProps = Partial<Record<Boxes, true>>;
+
+export const BoxSpace = styled(View)<BoxSpaceProps>(props => {
+	const {B, C, D, E, F, G} = props;
+	const [size, backgroundColor] = B
+		? [SIZES.content, COLORS.PINK]
+		: C
+		? [SIZES.contentLarge, COLORS.YELLOW]
+		: D
+		? [SIZES.container, COLORS.TURQUOISE]
+		: E
+		? [SIZES.box, COLORS.PINK75]
+		: F
+		? [SIZES.header, COLORS.YELLOW75]
+		: G
+		? [SIZES.pinSpacing, COLORS.TURQUOISE75]
+		: [SIZES.padding, COLORS.BLACK100];
+
+	return {
+		/** comment backgroundColor to hide spaces */
+		// backgroundColor,
+		width: size,
+		height: size,
+	};
+});
