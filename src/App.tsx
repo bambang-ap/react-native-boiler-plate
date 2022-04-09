@@ -1,20 +1,29 @@
 import React from 'react';
 
-import {Body, BoxSpace, Container, Input} from '@components';
-import {TEXT_SIZES} from '@constants/sizes';
-import {FONTS, TYPOGRAPHY} from '@constants/typography';
+import {
+	Body,
+	BoxSpace,
+	Button,
+	ButtonVariant,
+	Container,
+	Input,
+	Wrapper,
+} from '@components';
 
 const App = () => {
 	return (
 		<Container>
 			<Body>
-				<Input
-					title="jbshdkfnsdfh"
-					autoFocus
-					// renderLeftAccessory={() => <BoxSpace D />}
-					// renderRightAccessory={() => <BoxSpace D />}
-					placeholder="Placeholder"
-				/>
+				<Input placeholder="Placeholder" />
+				<BoxSpace B />
+				<Button variant={ButtonVariant.primary}>jhsdkfsdf</Button>
+				<Button variant={ButtonVariant.secondary}>jhsdkfsdf</Button>
+				<Button variant={ButtonVariant.success}>jhsdkfsdf</Button>
+				<Button variant={ButtonVariant.danger}>jhsdkfsdf</Button>
+				<Button variant={ButtonVariant.warning}>jhsdkfsdf</Button>
+				<Button variant={ButtonVariant.info}>jhsdkfsdf</Button>
+				<Button variant={ButtonVariant.light}>jhsdkfsdf</Button>
+				<Button variant={ButtonVariant.dark}>jhsdkfsdf</Button>
 			</Body>
 		</Container>
 	);

@@ -1,4 +1,4 @@
-import {ViewProps as RNViewProps} from 'react-native';
+import {ViewProps as RNViewProps, TextProps as RNTextProps} from 'react-native';
 
 import styled from 'styled-components/native';
 
@@ -20,33 +20,35 @@ export * from './Button';
 export type BgColor = {backgroundColor?: COLORS};
 export type TextVariant = {variant?: TYPOGRAPHY};
 
-type TextProps = Omit<Flex, 'row' | 'col'> &
+export type TextProps = TextPropsAdditional & RNTextProps;
+export type TextPropsAdditional = Omit<Flex, 'row' | 'col'> &
 	Size &
 	BgColor &
 	TextAlign &
 	Position &
-	TextVariant;
+	TextVariant & {color?: COLORS};
 
-export const Text = styled.Text<TextProps>(({backgroundColor, ...props}) => {
-	const {flexBoxStyleProps, restProps} = getFlexBox(props);
-	const {textAlign, ...rest} = flexBoxStyleProps ?? {};
-	const {variant} = restProps ?? {};
-	return {
-		...rest,
-		...typographyStyle(variant),
-		backgroundColor,
-	};
-});
+export const Text = styled.Text<TextPropsAdditional>(
+	({backgroundColor, ...props}) => {
+		const {flexBoxStyleProps, restProps} = getFlexBox(props);
+		const {variant, color} = restProps ?? {};
+		return {
+			...flexBoxStyleProps,
+			...typographyStyle(variant),
+			color,
+			backgroundColor,
+		};
+	},
+);
 
-type ViewPropsAdditional = FlexBox & BgColor;
+export type ViewPropsAdditional = FlexBox & BgColor;
 export type ViewProps = ViewPropsAdditional & RNViewProps;
 
 export const View = styled.View<ViewPropsAdditional>(
 	({backgroundColor, ...props}) => {
 		const {flexBoxStyleProps} = getFlexBox(props);
-		const {textAlign, ...rest} = flexBoxStyleProps ?? {};
 		return {
-			...rest,
+			...flexBoxStyleProps,
 			backgroundColor,
 		};
 	},
@@ -87,7 +89,7 @@ export const BoxSpace = styled(View)<BoxSpaceProps>(props => {
 
 	return {
 		/** comment backgroundColor to hide spaces */
-		// backgroundColor,
+		backgroundColor,
 		width: size,
 		height: size,
 	};
