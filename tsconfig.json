@@ -18,11 +18,13 @@
       "@components": ["./components"],
       "@constants/*": ["./constants/*"],
       "@hooks": ["./hooks"],
+      "@navigators": ["./navigators"],
       "@navigators/*": ["./navigators/*"],
       "@recoils/*": ["./recoils/*"],
       "@services/*": ["./services/*"],
       "@screens/*": ["./screens/*"],
       "@utils/*": ["./utils/*"],
+      "@interfaces": ["./types"],
       "@interfaces/*": ["./types/*"]
     },
     "outDir": "dist",

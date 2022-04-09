@@ -89,7 +89,7 @@ export const BoxSpace = styled(View)<BoxSpaceProps>(props => {
 
 	return {
 		/** comment backgroundColor to hide spaces */
-		backgroundColor,
+		// backgroundColor,
 		width: size,
 		height: size,
 	};
