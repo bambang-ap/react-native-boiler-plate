@@ -5,7 +5,8 @@ const {
 const aliasesImportGroups = Object.keys(paths).reduce((ret, pathKey) => {
 	const regexEndStar = new RegExp(/\/\*$/);
 	const key = pathKey.replace(regexEndStar, '');
-	ret.push(`/^${key}/`);
+	const val = `/^${key}/`;
+	if (!ret.includes(val)) ret.push(val);
 	return ret;
 }, []);
 
@@ -63,6 +64,7 @@ module.exports = {
 				prop: 'ignore',
 			},
 		],
+		'no-useless-escape': 0,
 		'react/jsx-filename-extension': 0,
 		'react/jsx-indent': 0,
 		'react/jsx-boolean-value': 0,

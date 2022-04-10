@@ -1,14 +1,14 @@
 import {Tekstur} from '@assets/data/plants';
 
 export type InputForm = {
-	curahHujan: string;
-	suhu: string;
-	ketinggian: string;
+	curahHujan: number;
+	suhu: number;
+	ketinggian: number;
 	teksturTanah: Tekstur[];
-	n: string;
-	p: string;
-	k: string;
-	bahanOrganik: string;
-	cOrg: string;
-	pH: string;
+	n: number;
+	p: number;
+	k: number;
+	bahanOrganik: number;
+	cOrg: number;
+	pH: number;
 };

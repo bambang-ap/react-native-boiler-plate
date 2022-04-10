@@ -30,6 +30,7 @@
     "keychain",
     "libphonenumber",
     "lsquo",
+    "mmap",
     "nestjs",
     "nestjsx",
     "nodemon",

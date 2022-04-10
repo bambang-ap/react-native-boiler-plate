@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {ScrollView} from 'react-native';
 
+import Slider from '@react-native-community/slider';
 import {useStateObject} from 'global-methods/hooks';
 
 import {Tekstur} from '@assets/data/plants';
@@ -9,141 +10,174 @@ import {
 	Body,
 	Text,
 	BoxSpace,
-	Input,
+	InputNumber,
 	Wrapper,
 	ButtonVariant,
 	Button,
+	Input,
 } from '@components';
+import {COLORS} from '@constants/colors';
 import {useScreenProps} from '@hooks';
 import {InputForm} from '@interfaces';
+
+type E = {key: keyof InputForm; placeholder: string} & (
+	| {type: 'input-number'; value: number}
+	| {type: 'radio'; items: string[]; value: string[]}
+	| {type: 'slider'; min: number; max: number; value: number}
+);
 
 const FormInput = () => {
 	const [navigation] = useScreenProps('FormInput');
 
 	const [state, setState] = useStateObject<InputForm>({
-		curahHujan: '0',
-		suhu: '0',
-		ketinggian: '0',
-		teksturTanah: [],
-		n: '0',
-		p: '0',
-		k: '0',
-		bahanOrganik: '0',
-		cOrg: '0',
-		pH: '0',
+		curahHujan: 300,
+		suhu: 30,
+		ketinggian: 300,
+		teksturTanah: ['lempung', 'debu'],
+		n: 0.09,
+		p: 10,
+		k: 35,
+		bahanOrganik: 2,
+		cOrg: 1,
+		pH: 7,
 	});
-
+	const y: E[] = [
+		{
+			type: 'input-number' as const,
+			key: 'curahHujan',
+			placeholder: 'Curah hujan',
+			value: state.curahHujan,
+		},
+		{
+			type: 'input-number' as const,
+			key: 'suhu',
+			placeholder: 'Suhu',
+			value: state.suhu,
+		},
+		{
+			type: 'input-number' as const,
+			key: 'ketinggian',
+			placeholder: 'Ketinggian',
+			value: state.ketinggian,
+		},
+		{
+			type: 'radio' as const,
+			key: 'teksturTanah',
+			items: ['debu', 'lempung', 'pasir'] as Tekstur[],
+			value: state.teksturTanah,
+			placeholder: 'Tekstur tanah',
+		},
+		{
+			type: 'slider' as const,
+			min: 0,
+			max: 100,
+			key: 'n',
+			placeholder: 'Nitrogen %',
+			value: state.n,
+		},
+		{
+			type: 'slider' as const,
+			min: 0,
+			max: 1000,
+			key: 'p',
+			placeholder: 'Fosfor mg/kg',
+			value: state.p,
+		},
+		{
+			type: 'slider' as const,
+			min: 0,
+			max: 1000,
+			key: 'k',
+			placeholder: 'Kalium mg/kg',
+			value: state.k,
+		},
+		{
+			type: 'slider' as const,
+			min: 0,
+			max: 100,
+			key: 'bahanOrganik',
+			placeholder: 'BO %',
+			value: state.cOrg,
+		},
+		{
+			type: 'slider' as const,
+			min: 0,
+			max: 100,
+			key: 'cOrg',
+			placeholder: 'C-Org %',
+			value: state.cOrg,
+		},
+		{
+			type: 'slider' as const,
+			min: 0,
+			max: 100,
+			key: 'pH',
+			placeholder: 'pH %',
+			value: state.pH,
+		},
+	];
 	return (
 		<Container>
 			<Body>
 				<ScrollView>
-					<Text>Curah hujan</Text>
-					<BoxSpace />
-					<Input
-						keyboardType="number-pad"
-						value={state.curahHujan}
-						placeholder="curahHujan"
-						onChangeText={curahHujan => setState({curahHujan})}
-					/>
-					<BoxSpace B />
-					<Text>Suhu</Text>
-					<BoxSpace />
-					<Input
-						keyboardType="number-pad"
-						value={state.suhu}
-						placeholder="suhu"
-						onChangeText={suhu => setState({suhu})}
-					/>
-					<BoxSpace B />
-					<Text>Ketinggian</Text>
-					<BoxSpace />
-					<Input
-						keyboardType="number-pad"
-						value={state.ketinggian}
-						placeholder="ketinggian"
-						onChangeText={ketinggian => setState({ketinggian})}
-					/>
-					<BoxSpace B />
-					<Text>Tekstur tanah</Text>
-					<BoxSpace />
-					<Wrapper>
-						{(['debu', 'lempung', 'pasir'] as Tekstur[]).mmap(
-							({item, isLast}) => {
-								const isSelected = state.teksturTanah.includes(item);
-								const variant = isSelected
-									? ButtonVariant.primary
-									: ButtonVariant.light;
-								const onPress = () => {
-									const teksturTanah = isSelected
-										? state.teksturTanah.filter(e => e !== item)
-										: [...state.teksturTanah, item];
-									setState({teksturTanah});
-								};
-								return (
-									<React.Fragment key={item}>
-										<Button flx onPress={onPress} variant={variant}>
-											{item}
-										</Button>
-										{!isLast && <BoxSpace B />}
-									</React.Fragment>
-								);
-							},
-						)}
-					</Wrapper>
-					<BoxSpace B />
-					<Text>N %</Text>
-					<BoxSpace />
-					<Input
-						keyboardType="number-pad"
-						value={state.n}
-						placeholder="n"
-						onChangeText={n => setState({n})}
-					/>
-					<BoxSpace B />
-					<Text>P mg/kg</Text>
-					<BoxSpace />
-					<Input
-						keyboardType="number-pad"
-						value={state.p}
-						placeholder="p"
-						onChangeText={p => setState({p})}
-					/>
-					<BoxSpace B />
-					<Text>K mg/kg</Text>
-					<BoxSpace />
-					<Input
-						keyboardType="number-pad"
-						value={state.k}
-						placeholder="k"
-						onChangeText={k => setState({k})}
-					/>
-					<BoxSpace B />
-					<Text>Bahan Organik</Text>
-					<BoxSpace />
-					<Input
-						keyboardType="number-pad"
-						value={state.bahanOrganik}
-						placeholder="bahanOrganik"
-						onChangeText={bahanOrganik => setState({bahanOrganik})}
-					/>
-					<BoxSpace B />
-					<Text>C-Org</Text>
-					<BoxSpace />
-					<Input
-						keyboardType="number-pad"
-						value={state.cOrg}
-						placeholder="cOrg"
-						onChangeText={cOrg => setState({cOrg})}
-					/>
-					<BoxSpace B />
-					<Text>pH</Text>
-					<BoxSpace />
-					<Input
-						keyboardType="number-pad"
-						value={state.pH}
-						placeholder="pH"
-						onChangeText={pH => setState({pH})}
-					/>
+					{y.mmap(({item}) => {
+						const {key, value, placeholder} = item;
+						const renderInput = item.type === 'input-number' && (
+							<InputNumber value={item.value} placeholder={placeholder} />
+						);
+						const renderSlider = item.type === 'slider' && (
+							<Slider
+								step={1}
+								value={item.value}
+								minimumValue={item.min}
+								maximumValue={item.max}
+								minimumTrackTintColor={COLORS.TURQUOISE}
+								maximumTrackTintColor={COLORS.TURQUOISE}
+								thumbTintColor={COLORS.PINK}
+								onSlidingComplete={val => setState({[key]: val})}
+								onValueChange={val => setState({[key]: val})}
+							/>
+						);
+						const renderRadio = item.type === 'radio' && (
+							<Wrapper>
+								{item.items.mmap(({item: content, isLast}) => {
+									const ef = state[key] as string[];
+									const isSelected = ef.includes(content);
+									const variant = isSelected
+										? ButtonVariant.primary
+										: ButtonVariant.light;
+									const onPress = () => {
+										const teksturTanah = isSelected
+											? ef.filter(e => e !== content)
+											: [...ef, content];
+										setState({[key]: teksturTanah});
+									};
+									return (
+										<React.Fragment key={content}>
+											<Button flx onPress={onPress} variant={variant}>
+												{content.ucwords()}
+											</Button>
+											{!isLast && <BoxSpace B />}
+										</React.Fragment>
+									);
+								})}
+							</Wrapper>
+						);
+
+						return (
+							<Fragment key={key}>
+								<Wrapper>
+									<Text>{placeholder}</Text>
+									{item.type === 'slider' && <Text>{value}</Text>}
+								</Wrapper>
+								<BoxSpace />
+								{renderInput}
+								{renderSlider}
+								{renderRadio}
+								<BoxSpace B />
+							</Fragment>
+						);
+					})}
 					<BoxSpace D />
 					<Button onPress={() => navigation.navigate('Calculated', state)}>
 						Calculate

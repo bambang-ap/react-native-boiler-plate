@@ -56,6 +56,7 @@ export const View = styled.View<ViewPropsAdditional>(
 
 export const Container = styled(View)({
 	flex: 1,
+	backgroundColor: COLORS.WHITE,
 });
 
 export const Body = styled(View)({

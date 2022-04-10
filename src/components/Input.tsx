@@ -1,14 +1,7 @@
-import React, {forwardRef} from 'react';
+import React, {forwardRef, useState} from 'react';
 import {TextInput, StyleProp, ViewStyle, TextInputProps} from 'react-native';
 
-import {
-	BoxSpace,
-	Text,
-	TextVariant,
-	View,
-	ViewProps,
-	Wrapper,
-} from '@components';
+import {BoxSpace, TextVariant, View, ViewProps, Wrapper} from '@components';
 import {COLORS} from '@constants/colors';
 import {SIZES} from '@constants/sizes';
 import {typographyStyle} from '@constants/typography';
@@ -82,3 +75,39 @@ export const Input = forwardRef<TextInput, InputProps>((props, ref) => {
 		</Wrapper>
 	);
 });
+
+type InputNumberProps = Omit<
+	InputProps,
+	'value' | 'onChangeText' | 'keyboardType'
+> & {
+	value?: number;
+	withDecimal?: boolean;
+	onChangeText?: (value: number) => void;
+};
+
+export const InputNumber = forwardRef<TextInput, InputNumberProps>(
+	(props, ref) => {
+		const {value, withDecimal, onChangeText, ...rest} = props;
+		const [val, setVal] = useState(value?.toString());
+		const onChange = (txt: string) => {
+			const [left, ...right] = txt.replace(/[^0-9\.]+/g, '').split('.');
+			const formattedVal = !withDecimal
+				? left
+				: right.length > 0
+				? [left, right.join('')].join('.')
+				: left;
+			const numFormattedVal = Number(formattedVal);
+			onChangeText?.(Number.isNaN(numFormattedVal) ? 0 : numFormattedVal);
+			setVal(formattedVal);
+		};
+		return (
+			<Input
+				ref={ref}
+				value={val}
+				onChangeText={onChange}
+				keyboardType="number-pad"
+				{...rest}
+			/>
+		);
+	},
+);
