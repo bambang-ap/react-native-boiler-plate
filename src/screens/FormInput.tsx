@@ -97,7 +97,7 @@ const FormInput = () => {
 			max: 100,
 			key: 'bahanOrganik',
 			placeholder: 'BO %',
-			value: state.cOrg,
+			value: state.bahanOrganik,
 		},
 		{
 			type: 'slider' as const,
