@@ -2,5 +2,7 @@
     "android.useAndroidX": "true",
     "android.enableJetifier": "true",
     "FLIPPER_VERSION": "0.99.0",
-    "CURRENT_CONFIG": "dev"
+    "CURRENT_CONFIG": "dev",
+    "RELEASE_KEY_PASSWORD": "U0RBRUVHQQ==",
+    "RELEASE_KEY_ALIAS": "sdae"
 }
