@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+import {ScrollView} from 'react-native';
+
+import Rainbow from '@indot/rainbowvis';
 
 import criteria from '@assets/data/criteria';
 import plants from '@assets/data/plants';
@@ -8,10 +11,14 @@ import {
 	Button,
 	ButtonVariant,
 	Container,
+	FlatList,
+	Image,
 	Text,
+	View,
 	Wrapper,
 } from '@components';
 import {COLORS} from '@constants/colors';
+import {SIZES} from '@constants/sizes';
 import {useScreenProps} from '@hooks';
 
 const Calculated = () => {
@@ -87,61 +94,90 @@ const Calculated = () => {
 	return (
 		<Container>
 			<Body>
-				<Wrapper>
-					{plants.mmap(({item}) => {
-						const isSelected = item?.name === plant?.name;
-						const variant = isSelected
-							? ButtonVariant.primary
-							: ButtonVariant.light;
+				<ScrollView>
+					<View>
+						<FlatList
+							data={plants}
+							numColumns={2}
+							renderItem={({item}) => {
+								const isSelected = item?.name === plant?.name;
+								const variant = isSelected
+									? ButtonVariant.primary
+									: ButtonVariant.light;
+								return (
+									<>
+										<Button
+											flx
+											key={item.name}
+											variant={variant}
+											onPress={() => setPlant(item)}
+											style={{marginBottom: SIZES.padding}}
+											textProps={{alignCenter: true}}>
+											<View width="10%">
+												<Image source={item.image} />
+											</View>
+											<BoxSpace />
+											<Text color={isSelected ? COLORS.WHITE : COLORS.BLACK100}>
+												{item.name}
+											</Text>
+										</Button>
+										<BoxSpace />
+									</>
+								);
+							}}
+						/>
+					</View>
+					<BoxSpace B />
+					{resultKey.mmap(({item: key}) => {
+						const val = result[key];
+						const colours = [COLORS.PINK, COLORS.YELLOW, COLORS.TURQUOISE];
+						const [valNum, value] = generateScore(val);
+
+						const rainbowMin = new Rainbow({colours, min: 0, max: 10});
+						const rainbowMax = new Rainbow({colours, min: 0, max: 100});
+
+						const colour = valNum > 10 ? rainbowMax : rainbowMin;
+						const color = `#${colour.colourAt(valNum)}` as COLORS;
+
 						return (
 							<>
-								<Button
-									flx
-									key={item.name}
-									variant={variant}
-									onPress={() => setPlant(item)}
-									textProps={{alignCenter: true}}>
-									{item.name}
-								</Button>
+								<Wrapper>
+									<Text>{key}</Text>
+									<Text backgroundColor={color} color={COLORS.WHITE}>
+										{` ${value} `}
+									</Text>
+								</Wrapper>
 								<BoxSpace />
 							</>
 						);
 					})}
-				</Wrapper>
-				<BoxSpace B />
-				{resultKey.mmap(({item: key}) => {
-					const val = result[key];
-					const [value, color] =
-						val === 'good'
-							? ['Baik', COLORS.TURQUOISE]
-							: val === 'less'
-							? ['Kurang', COLORS.YELLOW]
-							: val === 'more'
-							? ['Lebih', COLORS.PINK]
-							: val === 'veryLow'
-							? ['Sangat Rendah', COLORS.PINK75]
-							: val === 'low'
-							? ['Rendah', COLORS.PINK]
-							: val === 'medium'
-							? ['Sedang', COLORS.BLACK100]
-							: val === 'high'
-							? ['Tinggi', COLORS.TURQUOISE75]
-							: val === 'veryHigh'
-							? ['Sangat Tinggi', COLORS.TURQUOISE]
-							: ['', COLORS.WHITE];
-					return (
-						<>
-							<Wrapper>
-								<Text>{key}</Text>
-								<Text color={color}>{value}</Text>
-							</Wrapper>
-							<BoxSpace />
-						</>
-					);
-				})}
+				</ScrollView>
 			</Body>
 		</Container>
 	);
 };
 
 export default Calculated;
+
+const generateScore = (val: string) => {
+	const score =
+		val === 'good'
+			? [10, 'Baik']
+			: val === 'less'
+			? [0, 'Kurang']
+			: val === 'more'
+			? [0, 'Lebih']
+			: val === 'veryLow'
+			? [0, 'Sangat Rendah']
+			: val === 'low'
+			? [0, 'Rendah']
+			: val === 'medium'
+			? [5, 'Sedang']
+			: val === 'high'
+			? [10, 'Tinggi']
+			: val === 'veryHigh'
+			? [10, 'Sangat Tinggi']
+			: [0, ''];
+
+	return score as [number, string];
+};

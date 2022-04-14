@@ -11,4 +11,5 @@ export type InputForm = {
 	bahanOrganik: number;
 	cOrg: number;
 	pH: number;
+	kelembabanTanah: number;
 };

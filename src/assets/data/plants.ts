@@ -1,6 +1,9 @@
-export type Tekstur = 'debu' | 'lempung' | 'pasir';
+import images from '@assets/images';
+
+export type Tekstur = 'debu' | 'liat' | 'pasir' | 'lempung';
 
 const tomato = {
+	image: images.tomato,
 	name: 'Tomat',
 	curahMin: 400,
 	curahMax: 700,
@@ -21,6 +24,7 @@ const tomato = {
 	K2: 250,
 };
 const chili = {
+	image: images.chili,
 	name: 'Lombok',
 	curahMin: 600,
 	curahMax: 1200,
@@ -41,6 +45,7 @@ const chili = {
 	K2: 100,
 };
 const beans = {
+	image: images.beans,
 	name: 'Buncis',
 	curahMin: 350,
 	curahMax: 600,
@@ -61,6 +66,7 @@ const beans = {
 	K2: 6.6,
 };
 const peanuts = {
+	image: images.peanuts,
 	name: 'Kacang tanah',
 	curahMin: 450,
 	curahMax: 1300,
@@ -81,6 +87,7 @@ const peanuts = {
 	K2: 30,
 };
 const mungBean = {
+	image: images.mungBean,
 	name: 'Kacang hijau',
 	curahMin: 450,
 	curahMax: 1300,
