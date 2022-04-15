@@ -18,6 +18,8 @@ export * from './Button';
 export * from './FlatList';
 export * from './Image';
 export * from './Input';
+export * from './Section';
+export * from './Slider';
 
 export type BgColor = {backgroundColor?: COLORS};
 export type TextVariant = {variant?: TYPOGRAPHY};

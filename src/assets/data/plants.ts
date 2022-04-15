@@ -1,18 +1,43 @@
 import images from '@assets/images';
 
-export type Tekstur = 'debu' | 'liat' | 'pasir' | 'lempung';
+export type SoilTextureProps = {
+	quantitative: [debu: number, pasir: number, liat: number];
+	qualitative: [debu: boolean, pasir: boolean, liat: boolean, lempung: boolean];
+};
 
-const tomato = {
+export type Texture = 'debu' | 'liat' | 'pasir' | 'lempung';
+type E = {
+	image: unknown;
+	name: string;
+	rainFallMin: number;
+	rainFallMax: number;
+	tempMin: number;
+	tempMax: number;
+	heightMin: number;
+	heightMax: number;
+	texture: Texture[];
+	organic: number;
+	COrg: number;
+	phMin: number;
+	phMax: number;
+	N1: number;
+	N2: number;
+	P1: number;
+	P2: number;
+	K1: number;
+	K2: number;
+};
+const tomato: E = {
 	image: images.tomato,
 	name: 'Tomat',
-	curahMin: 400,
-	curahMax: 700,
-	suhuMin: 18,
-	suhuMax: 24,
-	ketinggianMin: 100,
-	ketinggianMax: 2000,
-	tekstur: ['debu', 'pasir'] as Tekstur[],
-	bahanOrganik: 2,
+	rainFallMin: 400,
+	rainFallMax: 700,
+	tempMin: 18,
+	tempMax: 24,
+	heightMin: 100,
+	heightMax: 2000,
+	texture: ['debu', 'pasir'],
+	organic: 2,
 	COrg: 1.2,
 	phMin: 6,
 	phMax: 7.5,
@@ -23,17 +48,17 @@ const tomato = {
 	K1: 250,
 	K2: 250,
 };
-const chili = {
+const chili: E = {
 	image: images.chili,
 	name: 'Lombok',
-	curahMin: 600,
-	curahMax: 1200,
-	suhuMin: 21,
-	suhuMax: 27,
-	ketinggianMin: 1,
-	ketinggianMax: 2000,
-	tekstur: ['lempung', 'debu'] as Tekstur[],
-	bahanOrganik: 1.3,
+	rainFallMin: 600,
+	rainFallMax: 1200,
+	tempMin: 21,
+	tempMax: 27,
+	heightMin: 1,
+	heightMax: 2000,
+	texture: ['lempung', 'debu'],
+	organic: 1.3,
 	COrg: 0.8,
 	phMin: 6,
 	phMax: 7.6,
@@ -44,17 +69,17 @@ const chili = {
 	K1: 50,
 	K2: 100,
 };
-const beans = {
+const beans: E = {
 	image: images.beans,
 	name: 'Buncis',
-	curahMin: 350,
-	curahMax: 600,
-	suhuMin: 12,
-	suhuMax: 24,
-	ketinggianMin: 100,
-	ketinggianMax: 1500,
-	tekstur: ['lempung', 'pasir'] as Tekstur[],
-	bahanOrganik: 2,
+	rainFallMin: 350,
+	rainFallMax: 600,
+	tempMin: 12,
+	tempMax: 24,
+	heightMin: 100,
+	heightMax: 1500,
+	texture: ['lempung', 'pasir'],
+	organic: 2,
 	COrg: 1.2,
 	phMin: 5.6,
 	phMax: 7.5,
@@ -65,17 +90,17 @@ const beans = {
 	K1: 6.6,
 	K2: 6.6,
 };
-const peanuts = {
+const peanuts: E = {
 	image: images.peanuts,
 	name: 'Kacang tanah',
-	curahMin: 450,
-	curahMax: 1300,
-	suhuMin: 20,
-	suhuMax: 30,
-	ketinggianMin: 100,
-	ketinggianMax: 1500,
-	tekstur: ['lempung', 'debu'] as Tekstur[],
-	bahanOrganik: 2,
+	rainFallMin: 450,
+	rainFallMax: 1300,
+	tempMin: 20,
+	tempMax: 30,
+	heightMin: 100,
+	heightMax: 1500,
+	texture: ['lempung', 'debu'],
+	organic: 2,
 	COrg: 1.2,
 	phMin: 6,
 	phMax: 7,
@@ -86,17 +111,17 @@ const peanuts = {
 	K1: 30,
 	K2: 30,
 };
-const mungBean = {
+const mungBean: E = {
 	image: images.mungBean,
 	name: 'Kacang hijau',
-	curahMin: 450,
-	curahMax: 1300,
-	suhuMin: 20,
-	suhuMax: 30,
-	ketinggianMin: 100,
-	ketinggianMax: 1500,
-	tekstur: ['lempung', 'debu'] as Tekstur[],
-	bahanOrganik: 2,
+	rainFallMin: 450,
+	rainFallMax: 1300,
+	tempMin: 20,
+	tempMax: 30,
+	heightMin: 100,
+	heightMax: 1500,
+	texture: ['lempung', 'debu'],
+	organic: 2,
 	COrg: 1.2,
 	phMin: 6,
 	phMax: 7,

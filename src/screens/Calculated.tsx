@@ -1,39 +1,27 @@
-import React, {useState} from 'react';
+import React, {Fragment, useState} from 'react';
 import {ScrollView} from 'react-native';
 
 import Rainbow from '@indot/rainbowvis';
+import {Plants} from 'components/app';
 
 import criteria from '@assets/data/criteria';
-import plants from '@assets/data/plants';
-import {
-	Body,
-	BoxSpace,
-	Button,
-	ButtonVariant,
-	Container,
-	FlatList,
-	Image,
-	Text,
-	View,
-	Wrapper,
-} from '@components';
+import {Body, BoxSpace, Container, Text, Wrapper} from '@components';
 import {COLORS} from '@constants/colors';
-import {SIZES} from '@constants/sizes';
 import {useScreenProps} from '@hooks';
 
 const Calculated = () => {
 	const [, {params}] = useScreenProps('Calculated');
-	const [plant, setPlant] = useState(plants[0]);
+	const [plant, setPlant] = useState(params.plant);
 	const {
 		n,
 		k,
 		p,
-		bahanOrganik: BO,
+		organic: BO,
 		cOrg,
 		pH,
-		curahHujan,
-		suhu,
-		ketinggian,
+		rainFall,
+		temperature,
+		height,
 	} = params;
 	const npkTanah = {Kalium: 'veryLow', Natrium: 'veryLow', Fosfor: 'veryLow'};
 	criteria.forEach(item => {
@@ -45,38 +33,37 @@ const Calculated = () => {
 
 	const {
 		COrg,
-		bahanOrganik,
+		organic,
 		phMax,
 		phMin,
-		curahMin,
-		curahMax,
-		suhuMin,
-		suhuMax,
-		ketinggianMin,
-		ketinggianMax,
+		rainFallMin,
+		rainFallMax,
+		tempMin,
+		tempMax,
+		heightMin,
+		heightMax,
 	} = plant ?? {};
 
 	const calcCOrg = COrg === cOrg ? 'good' : cOrg > COrg ? 'more' : 'less';
-	const calcBO =
-		BO === bahanOrganik ? 'good' : BO > bahanOrganik ? 'more' : 'less';
+	const calcBO = BO === organic ? 'good' : BO > organic ? 'more' : 'less';
 	const calcPH =
 		pH >= phMin && pH <= phMax ? 'good' : pH > phMax ? 'more' : 'less';
 	const calcCurah =
-		curahHujan >= curahMin && curahHujan <= curahMax
+		rainFall >= rainFallMin && rainFall <= rainFallMax
 			? 'good'
-			: curahHujan > curahMax
+			: rainFall > rainFallMax
 			? 'more'
 			: 'less';
 	const calcSuhu =
-		suhu >= suhuMin && suhu <= suhuMax
+		temperature >= tempMin && temperature <= tempMax
 			? 'good'
-			: suhu > suhuMax
+			: temperature > tempMax
 			? 'more'
 			: 'less';
 	const calcKetinggian =
-		ketinggian >= ketinggianMin && ketinggian <= ketinggianMax
+		height >= heightMin && height <= heightMax
 			? 'good'
-			: ketinggian > ketinggianMax
+			: height > heightMax
 			? 'more'
 			: 'less';
 
@@ -95,38 +82,7 @@ const Calculated = () => {
 		<Container>
 			<Body>
 				<ScrollView>
-					<View>
-						<FlatList
-							data={plants}
-							numColumns={2}
-							renderItem={({item}) => {
-								const isSelected = item?.name === plant?.name;
-								const variant = isSelected
-									? ButtonVariant.primary
-									: ButtonVariant.light;
-								return (
-									<>
-										<Button
-											flx
-											key={item.name}
-											variant={variant}
-											onPress={() => setPlant(item)}
-											style={{marginBottom: SIZES.padding}}
-											textProps={{alignCenter: true}}>
-											<View width="10%">
-												<Image source={item.image} />
-											</View>
-											<BoxSpace />
-											<Text color={isSelected ? COLORS.WHITE : COLORS.BLACK100}>
-												{item.name}
-											</Text>
-										</Button>
-										<BoxSpace />
-									</>
-								);
-							}}
-						/>
-					</View>
+					<Plants onChange={setPlant} plant={plant} />
 					<BoxSpace B />
 					{resultKey.mmap(({item: key}) => {
 						const val = result[key];
@@ -136,11 +92,11 @@ const Calculated = () => {
 						const rainbowMin = new Rainbow({colours, min: 0, max: 10});
 						const rainbowMax = new Rainbow({colours, min: 0, max: 100});
 
-						const colour = valNum > 10 ? rainbowMax : rainbowMin;
-						const color = `#${colour.colourAt(valNum)}` as COLORS;
+						const colorProcess = valNum > 10 ? rainbowMax : rainbowMin;
+						const color = `#${colorProcess.colorAt(valNum)}` as COLORS;
 
 						return (
-							<>
+							<Fragment key={key}>
 								<Wrapper>
 									<Text>{key}</Text>
 									<Text backgroundColor={color} color={COLORS.WHITE}>
@@ -148,7 +104,7 @@ const Calculated = () => {
 									</Text>
 								</Wrapper>
 								<BoxSpace />
-							</>
+							</Fragment>
 						);
 					})}
 				</ScrollView>

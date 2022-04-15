@@ -1,15 +1,16 @@
-import {Tekstur} from '@assets/data/plants';
+import plants, {SoilTextureProps, Texture} from '@assets/data/plants';
 
 export type InputForm = {
-	curahHujan: number;
-	suhu: number;
-	ketinggian: number;
-	teksturTanah: Tekstur[];
+	plant?: typeof plants[number];
+	rainFall: number;
+	temperature: number;
+	height: number;
+	textureType: 'qualitative' | 'quantitative';
 	n: number;
 	p: number;
 	k: number;
-	bahanOrganik: number;
+	organic: number;
 	cOrg: number;
 	pH: number;
-	kelembabanTanah: number;
-};
+	soilMoisture: number;
+} & SoilTextureProps;
