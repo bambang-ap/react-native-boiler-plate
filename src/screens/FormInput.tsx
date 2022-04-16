@@ -37,16 +37,32 @@ const FormInput = () => {
 					<Plants onChange={plant => setState({plant})} plant={state.plant} />
 					<BoxSpace />
 					<Section title="Lokasi">
-						<Input placeholder="Lokasi" />
+						<Input
+							placeholder="Lokasi"
+							value={state.location}
+							onChangeText={location => setState({location})}
+						/>
 					</Section>
 					<Section title="Curah hujan">
-						<InputNumber value={state.rainFall} placeholder="Curah hujan" />
+						<InputNumber
+							placeholder="Curah hujan"
+							value={state.rainFall}
+							onChangeText={rainFall => setState({rainFall})}
+						/>
 					</Section>
 					<Section title="Suhu">
-						<InputNumber value={state.temperature} placeholder="Suhu" />
+						<InputNumber
+							placeholder="Suhu"
+							value={state.temperature}
+							onChangeText={temperature => setState({temperature})}
+						/>
 					</Section>
 					<Section title="Ketinggian">
-						<InputNumber value={state.height} placeholder="Ketinggian" />
+						<InputNumber
+							placeholder="Ketinggian"
+							value={state.height}
+							onChangeText={height => setState({height})}
+						/>
 					</Section>
 					<SoilTexture onChange={value => setState(value)} />
 					<Slider
@@ -170,7 +186,6 @@ const SoilTexture = (props: {onChange: (value: SoilTextureProps) => void}) => {
 				onPress={() => toggleQualitative(3)}>
 				Lempung
 			</Button>
-			<BoxSpace B />
 		</>
 	);
 
@@ -210,7 +225,7 @@ const SoilTexture = (props: {onChange: (value: SoilTextureProps) => void}) => {
 			<Text>Tekstur tanah</Text>
 			<BoxSpace />
 			<Wrapper>
-				<View>
+				{/* <View>
 					<Button
 						variant={
 							type === 'qualitative'
@@ -231,12 +246,13 @@ const SoilTexture = (props: {onChange: (value: SoilTextureProps) => void}) => {
 						Kuantitatif
 					</Button>
 				</View>
-				<BoxSpace B />
+				<BoxSpace B /> */}
 				<View flx>
-					{renderQualitative}
 					{renderQuantitative}
+					<Wrapper>{renderQualitative}</Wrapper>
 				</View>
 			</Wrapper>
+			<BoxSpace B />
 		</>
 	);
 };

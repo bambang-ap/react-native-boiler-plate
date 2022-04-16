@@ -15,8 +15,6 @@ type SliderProps = {
 };
 
 export const Slider = (props: SliderProps) => {
-	const [isSliding, setSliding] = useState(false);
-	const [key, setKey] = useState(uuid());
 	const {
 		step,
 		value,
@@ -25,13 +23,10 @@ export const Slider = (props: SliderProps) => {
 		withoutValue,
 		minMax: [min, max],
 	} = props;
-	useEffect(() => {
-		if (!isSliding) setKey(uuid());
-	}, [isSliding]);
+
 	return (
 		<Section title={title} value={value} withoutValue={withoutValue}>
 			<RNSlider
-				key={key}
 				step={step}
 				value={value}
 				minimumValue={min}
@@ -39,11 +34,7 @@ export const Slider = (props: SliderProps) => {
 				minimumTrackTintColor={COLORS.TURQUOISE}
 				maximumTrackTintColor={COLORS.TURQUOISE}
 				thumbTintColor={COLORS.PINK}
-				onSlidingStart={() => setSliding(false)}
-				onSlidingComplete={val => {
-					setSliding(true);
-					onChange?.(val);
-				}}
+				onSlidingComplete={onChange}
 				onValueChange={onChange}
 			/>
 		</Section>

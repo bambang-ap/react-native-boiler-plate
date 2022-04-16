@@ -5,78 +5,116 @@ import Rainbow from '@indot/rainbowvis';
 import {Plants} from 'components/app';
 
 import criteria from '@assets/data/criteria';
-import {Body, BoxSpace, Container, Text, Wrapper} from '@components';
+import {Body, BoxSpace, Container, FlatList, Text, Wrapper} from '@components';
 import {COLORS} from '@constants/colors';
+import {TYPOGRAPHY} from '@constants/typography';
 import {useScreenProps} from '@hooks';
+
+type Element = 'Natrium' | 'Fosfor' | 'Kalium';
+const ctx: Record<Element, [Element, string, number]> = {
+	Kalium: [null, '', 0],
+	Natrium: [null, '', 0],
+	Fosfor: [null, '', 0],
+};
 
 const Calculated = () => {
 	const [, {params}] = useScreenProps('Calculated');
 	const [plant, setPlant] = useState(params.plant);
+
 	const {
 		n,
 		k,
 		p,
-		organic: BO,
+		organic,
 		cOrg,
 		pH,
 		rainFall,
 		temperature,
 		height,
+		soilMoisture,
+		qualitative,
+		// textureType,
+		// quantitative,
+		// location,
 	} = params;
-	const npkTanah = {Kalium: 'veryLow', Natrium: 'veryLow', Fosfor: 'veryLow'};
-	criteria.forEach(item => {
-		const {K1, K2, N1, N2, P1, P2, name} = item;
-		if (n >= N1 && n <= N2) npkTanah.Natrium = name;
-		if (p >= P1 && p <= P2) npkTanah.Fosfor = name;
-		if (k >= K1 && k <= K2) npkTanah.Kalium = name;
+
+	const calcCriteria = criteria.reduce((ret, item) => {
+		const {K1, K2, N1, N2, P1, P2, name, score} = item;
+		if (n >= N1 && n <= N2) ret.Natrium = ['Natrium', name, score];
+		if (p >= P1 && p <= P2) ret.Fosfor = ['Fosfor', name, score];
+		if (k >= K1 && k <= K2) ret.Kalium = ['Kalium', name, score];
+		return ret;
+	}, ctx);
+
+	const calcCOrg = calculateScore('C-Org', cOrg, plant.COrg);
+	const calcBO = calculateScore('Bahan Organik', organic, plant.organic);
+	const calcPH = calculateScore('pH', pH, plant.phMin, plant.phMax);
+	const calcCurah = calculateScore(
+		'Curah Hujan',
+		rainFall,
+		plant.rainFallMin,
+		plant.rainFallMax,
+	);
+	const calcSuhu = calculateScore(
+		'Suhu',
+		temperature,
+		plant.tempMin,
+		plant.tempMax,
+	);
+	const calcKetinggian = calculateScore(
+		'Ketinggian',
+		height,
+		plant.heightMin,
+		plant.heightMax,
+	);
+	const calcSoilMoisture: [string, string, number] =
+		(soilMoisture >= 10 && soilMoisture <= 19) ||
+		(soilMoisture >= 31 && soilMoisture <= 70)
+			? ['Kelembaban Tanah', 'Sedang', 5]
+			: calculateScore('Kelembaban Tanah', soilMoisture, 20, 70);
+
+	const calcQualitative: number = eval(
+		plant.textureQualitative
+			.map(v => {
+				const f = 10 / plant.textureQualitative.length;
+				switch (v) {
+					case 'debu':
+						return qualitative[0] ? f : 0;
+					case 'pasir':
+						return qualitative[1] ? f : 0;
+					case 'liat':
+						return qualitative[2] ? f : 0;
+					case 'lempung':
+						return qualitative[3] ? f : 0;
+					default:
+						return 0;
+				}
+			})
+			.join('+'),
+	);
+
+	const textureLevel =
+		calcQualitative >= 7 ? 'Baik' : calcQualitative >= 3 ? 'Sedang' : 'Kurang';
+
+	const scores = Object.values({
+		calcCurah,
+		calcSuhu,
+		calcKetinggian,
+		calcQualitative: ['Tekstur Tanah', textureLevel, calcQualitative] as [
+			string,
+			string,
+			number,
+		],
+		calcSoilMoisture,
+		...calcCriteria,
+		calcBO,
+		calcCOrg,
+		calcPH,
 	});
 
-	const {
-		COrg,
-		organic,
-		phMax,
-		phMin,
-		rainFallMin,
-		rainFallMax,
-		tempMin,
-		tempMax,
-		heightMin,
-		heightMax,
-	} = plant ?? {};
-
-	const calcCOrg = COrg === cOrg ? 'good' : cOrg > COrg ? 'more' : 'less';
-	const calcBO = BO === organic ? 'good' : BO > organic ? 'more' : 'less';
-	const calcPH =
-		pH >= phMin && pH <= phMax ? 'good' : pH > phMax ? 'more' : 'less';
-	const calcCurah =
-		rainFall >= rainFallMin && rainFall <= rainFallMax
-			? 'good'
-			: rainFall > rainFallMax
-			? 'more'
-			: 'less';
-	const calcSuhu =
-		temperature >= tempMin && temperature <= tempMax
-			? 'good'
-			: temperature > tempMax
-			? 'more'
-			: 'less';
-	const calcKetinggian =
-		height >= heightMin && height <= heightMax
-			? 'good'
-			: height > heightMax
-			? 'more'
-			: 'less';
-
-	const result = {
-		'Curah Hujan': calcCurah,
-		Suhu: calcSuhu,
-		Ketinggian: calcKetinggian,
-		...npkTanah,
-		BO: calcBO,
-		'C-Org': calcCOrg,
-		pH: calcPH,
-	};
-	const resultKey = Object.keys(result);
+	const [_resultScore, resultTxt] = generate(
+		scores.map(([, , score]) => score),
+	);
 
 	return (
 		<Container>
@@ -84,29 +122,32 @@ const Calculated = () => {
 				<ScrollView>
 					<Plants onChange={setPlant} plant={plant} />
 					<BoxSpace B />
-					{resultKey.mmap(({item: key}) => {
-						const val = result[key];
-						const colours = [COLORS.PINK, COLORS.YELLOW, COLORS.TURQUOISE];
-						const [valNum, value] = generateScore(val);
+					<Text alignCenter variant={TYPOGRAPHY.headline1}>
+						{resultTxt}
+					</Text>
+					<BoxSpace B />
+					<FlatList
+						data={scores}
+						renderItem={({item}) => {
+							const [name, level, valNum] = item;
+							const colours = [COLORS.PINK, COLORS.YELLOW, COLORS.TURQUOISE];
+							const rainbow = new Rainbow({colours, min: 0, max: 10});
 
-						const rainbowMin = new Rainbow({colours, min: 0, max: 10});
-						const rainbowMax = new Rainbow({colours, min: 0, max: 100});
+							const color = `#${rainbow.colorAt(valNum)}` as COLORS;
 
-						const colorProcess = valNum > 10 ? rainbowMax : rainbowMin;
-						const color = `#${colorProcess.colorAt(valNum)}` as COLORS;
-
-						return (
-							<Fragment key={key}>
-								<Wrapper>
-									<Text>{key}</Text>
-									<Text backgroundColor={color} color={COLORS.WHITE}>
-										{` ${value} `}
-									</Text>
-								</Wrapper>
-								<BoxSpace />
-							</Fragment>
-						);
-					})}
+							return (
+								<Fragment>
+									<Wrapper>
+										<Text>{name}</Text>
+										<Text
+											backgroundColor={color}
+											color={COLORS.WHITE}>{` ${level} `}</Text>
+									</Wrapper>
+									<BoxSpace />
+								</Fragment>
+							);
+						}}
+					/>
 				</ScrollView>
 			</Body>
 		</Container>
@@ -115,25 +156,32 @@ const Calculated = () => {
 
 export default Calculated;
 
-const generateScore = (val: string) => {
-	const score =
-		val === 'good'
-			? [10, 'Baik']
-			: val === 'less'
-			? [0, 'Kurang']
-			: val === 'more'
-			? [0, 'Lebih']
-			: val === 'veryLow'
-			? [0, 'Sangat Rendah']
-			: val === 'low'
-			? [0, 'Rendah']
-			: val === 'medium'
-			? [5, 'Sedang']
-			: val === 'high'
-			? [10, 'Tinggi']
-			: val === 'veryHigh'
-			? [10, 'Sangat Tinggi']
-			: [0, ''];
+const generate = (scores: number[]): [number, string] => {
+	/**
+	 * 0	-	40	tidak cocok
+	 * 41 - 70	sesuai bersyarat
+	 * 70 >			sesuai
+	 *
+	 * 41	-	100	muncul rekomendasi pupuk
+	 */
 
-	return score as [number, string];
+	const result = eval(scores.map(y => y / (10 / scores.length)).join('+'));
+	return result > 70
+		? [result, 'Sesuai']
+		: result >= 40
+		? [result, 'Sesuai Bersyarat']
+		: [result, 'Tidak Sesuai'];
+};
+
+const calculateScore = (
+	name: string,
+	value: number,
+	min: number,
+	max?: number,
+): [string, string, number] => {
+	return value >= min && value <= (max ?? min)
+		? [name, 'Baik', 10]
+		: value > max
+		? [name, 'Lebih', 0]
+		: [name, 'Kurang', 0];
 };

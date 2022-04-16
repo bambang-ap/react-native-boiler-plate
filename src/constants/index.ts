@@ -1,10 +1,12 @@
+import plants from '@assets/data/plants';
 import {InputForm} from '@interfaces';
 
 export const INPUT_FORM: InputForm = {
+	location: '',
 	qualitative: [false, false, false, false],
 	quantitative: [0, 0, 0],
 	textureType: 'qualitative',
-	plant: undefined,
+	plant: plants[0],
 	rainFall: 300,
 	temperature: 30,
 	height: 300,

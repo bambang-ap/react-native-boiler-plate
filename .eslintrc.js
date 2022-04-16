@@ -64,6 +64,7 @@ module.exports = {
 				prop: 'ignore',
 			},
 		],
+		'no-eval': 1,
 		'no-useless-escape': 0,
 		'react/jsx-filename-extension': 0,
 		'react/jsx-indent': 0,

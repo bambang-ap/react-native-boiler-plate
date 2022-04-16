@@ -6,7 +6,8 @@ export type SoilTextureProps = {
 };
 
 export type Texture = 'debu' | 'liat' | 'pasir' | 'lempung';
-type E = {
+
+type PlantRequirement = {
 	image: unknown;
 	name: string;
 	rainFallMin: number;
@@ -15,19 +16,17 @@ type E = {
 	tempMax: number;
 	heightMin: number;
 	heightMax: number;
-	texture: Texture[];
+	textureQualitative: Texture[];
+	textureQuantitative: Record<Exclude<Texture, 'lempung'>, number>;
 	organic: number;
 	COrg: number;
 	phMin: number;
 	phMax: number;
-	N1: number;
-	N2: number;
-	P1: number;
-	P2: number;
-	K1: number;
-	K2: number;
+	N: number;
+	P: number;
+	K: number;
 };
-const tomato: E = {
+const tomato: PlantRequirement = {
 	image: images.tomato,
 	name: 'Tomat',
 	rainFallMin: 400,
@@ -36,19 +35,17 @@ const tomato: E = {
 	tempMax: 24,
 	heightMin: 100,
 	heightMax: 2000,
-	texture: ['debu', 'pasir'],
+	textureQualitative: ['debu', 'pasir'],
+	textureQuantitative: {debu: 30, liat: 30, pasir: 40},
 	organic: 2,
 	COrg: 1.2,
 	phMin: 6,
 	phMax: 7.5,
-	N1: 150,
-	N2: 150,
-	P1: 200,
-	P2: 200,
-	K1: 250,
-	K2: 250,
+	N: 150,
+	P: 200,
+	K: 250,
 };
-const chili: E = {
+const chili: PlantRequirement = {
 	image: images.chili,
 	name: 'Lombok',
 	rainFallMin: 600,
@@ -57,19 +54,17 @@ const chili: E = {
 	tempMax: 27,
 	heightMin: 1,
 	heightMax: 2000,
-	texture: ['lempung', 'debu'],
+	textureQualitative: ['lempung', 'debu'],
+	textureQuantitative: {debu: 30, liat: 30, pasir: 40},
 	organic: 1.3,
 	COrg: 0.8,
 	phMin: 6,
 	phMax: 7.6,
-	N1: 100,
-	N2: 170,
-	P1: 25,
-	P2: 50,
-	K1: 50,
-	K2: 100,
+	N: 170,
+	P: 50,
+	K: 100,
 };
-const beans: E = {
+const beans: PlantRequirement = {
 	image: images.beans,
 	name: 'Buncis',
 	rainFallMin: 350,
@@ -78,19 +73,17 @@ const beans: E = {
 	tempMax: 24,
 	heightMin: 100,
 	heightMax: 1500,
-	texture: ['lempung', 'pasir'],
+	textureQualitative: ['lempung', 'pasir'],
+	textureQuantitative: {debu: 30, liat: 30, pasir: 40},
 	organic: 2,
 	COrg: 1.2,
 	phMin: 5.6,
 	phMax: 7.5,
-	N1: 31,
-	N2: 31,
-	P1: 3.5,
-	P2: 2.5,
-	K1: 6.6,
-	K2: 6.6,
+	N: 31,
+	P: 2.5,
+	K: 6.6,
 };
-const peanuts: E = {
+const peanuts: PlantRequirement = {
 	image: images.peanuts,
 	name: 'Kacang tanah',
 	rainFallMin: 450,
@@ -99,19 +92,17 @@ const peanuts: E = {
 	tempMax: 30,
 	heightMin: 100,
 	heightMax: 1500,
-	texture: ['lempung', 'debu'],
+	textureQualitative: ['lempung', 'debu'],
+	textureQuantitative: {debu: 30, liat: 30, pasir: 40},
 	organic: 2,
 	COrg: 1.2,
 	phMin: 6,
 	phMax: 7,
-	N1: 40,
-	N2: 40,
-	P1: 45,
-	P2: 45,
-	K1: 30,
-	K2: 30,
+	N: 40,
+	P: 45,
+	K: 30,
 };
-const mungBean: E = {
+const mungBean: PlantRequirement = {
 	image: images.mungBean,
 	name: 'Kacang hijau',
 	rainFallMin: 450,
@@ -120,17 +111,15 @@ const mungBean: E = {
 	tempMax: 30,
 	heightMin: 100,
 	heightMax: 1500,
-	texture: ['lempung', 'debu'],
+	textureQualitative: ['lempung', 'debu'],
+	textureQuantitative: {debu: 30, liat: 30, pasir: 40},
 	organic: 2,
 	COrg: 1.2,
 	phMin: 6,
 	phMax: 7,
-	N1: 0,
-	N2: 0,
-	P1: 60,
-	P2: 60,
-	K1: 25,
-	K2: 25,
+	N: 0,
+	P: 60,
+	K: 25,
 };
 
 const plants = [tomato, chili, beans, peanuts, mungBean];
