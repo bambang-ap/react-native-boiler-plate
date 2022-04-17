@@ -18,6 +18,7 @@ import {
 	Wrapper,
 	ButtonVariant,
 	View,
+	Header,
 } from '@components';
 import {INPUT_FORM} from '@constants';
 import {useScreenProps} from '@hooks';
@@ -30,6 +31,11 @@ const FormInput = () => {
 
 	return (
 		<Container>
+			<Header
+				renderAccessoryLeft={noop}
+				textProps={{alignCenter: true}}
+				title="Smart Dryland Agroecosystem"
+			/>
 			<Body>
 				<ScrollView>
 					<Text>Tanaman</Text>

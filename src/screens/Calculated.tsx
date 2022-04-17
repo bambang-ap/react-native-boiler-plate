@@ -5,7 +5,15 @@ import Rainbow from '@indot/rainbowvis';
 import {Plants} from 'components/app';
 
 import criteria from '@assets/data/criteria';
-import {Body, BoxSpace, Container, FlatList, Text, Wrapper} from '@components';
+import {
+	Body,
+	BoxSpace,
+	Container,
+	FlatList,
+	Header,
+	Text,
+	Wrapper,
+} from '@components';
 import {COLORS} from '@constants/colors';
 import {TYPOGRAPHY} from '@constants/typography';
 import {useScreenProps} from '@hooks';
@@ -18,7 +26,7 @@ const ctx: Record<Element, [Element, string, number]> = {
 };
 
 const Calculated = () => {
-	const [, {params}] = useScreenProps('Calculated');
+	const [navigation, {params}] = useScreenProps('Calculated');
 	const [plant, setPlant] = useState(params.plant);
 
 	const {
@@ -118,6 +126,11 @@ const Calculated = () => {
 
 	return (
 		<Container>
+			<Header
+				textProps={{alignCenter: true}}
+				title={plant.name}
+				onPressLeft={navigation.goBack}
+			/>
 			<Body>
 				<ScrollView>
 					<Plants onChange={setPlant} plant={plant} />

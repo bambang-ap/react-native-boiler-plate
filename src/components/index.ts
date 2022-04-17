@@ -16,6 +16,8 @@ import {
 
 export * from './Button';
 export * from './FlatList';
+export * from './Header';
+export * from './Icon';
 export * from './Image';
 export * from './Input';
 export * from './Section';
@@ -35,12 +37,12 @@ export type TextPropsAdditional = Omit<Flex, 'row' | 'col'> &
 export const Text = styled.Text<TextPropsAdditional>(
 	({backgroundColor, ...props}) => {
 		const {flexBoxStyleProps, restProps} = getFlexBox(props);
-		const {variant, color} = restProps ?? {};
+		const {variant, color = COLORS.BLACK100} = restProps ?? {};
 		return {
 			...flexBoxStyleProps,
 			...typographyStyle(variant),
-			color,
 			backgroundColor,
+			color,
 		};
 	},
 );
