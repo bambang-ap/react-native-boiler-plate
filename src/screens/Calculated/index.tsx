@@ -17,6 +17,10 @@ import {
 import {COLORS} from '@constants/colors';
 import {TYPOGRAPHY} from '@constants/typography';
 import {useScreenProps} from '@hooks';
+import {InputForm} from '@interfaces';
+import {calculateScore, generate} from '@utils';
+
+import Fertilizer from './Fertilizer';
 
 type Element = 'Natrium' | 'Fosfor' | 'Kalium';
 const ctx: Record<Element, [Element, string, number]> = {
@@ -29,6 +33,67 @@ const Calculated = () => {
 	const [navigation, {params}] = useScreenProps('Calculated');
 	const [plant, setPlant] = useState(params.plant);
 
+	const {scoreObject, scoreArray: scores} = generateScores(params, plant);
+
+	const [, resultTxt, showFertilizer] = generate(
+		scores.map(([, , score]) => score),
+	);
+
+	return (
+		<Container>
+			<Header
+				textProps={{alignCenter: true}}
+				title={plant.name}
+				onPressLeft={navigation.goBack}
+			/>
+			<Body>
+				<ScrollView>
+					<Plants onChange={setPlant} plant={plant} />
+					<BoxSpace B />
+					<Text alignCenter variant={TYPOGRAPHY.headline1}>
+						{resultTxt}
+					</Text>
+					<BoxSpace B />
+					<FlatList
+						data={scores}
+						renderItem={({item}) => {
+							const [name, level, valNum] = item;
+							const colours = [COLORS.PINK, COLORS.YELLOW, COLORS.TURQUOISE];
+							const rainbow = new Rainbow({colours, min: 0, max: 10});
+
+							const color = `#${rainbow.colorAt(valNum)}` as COLORS;
+
+							return (
+								<Fragment>
+									<Wrapper>
+										<Text>{name}</Text>
+										<Text
+											backgroundColor={color}
+											color={COLORS.WHITE}>{` ${level} `}</Text>
+									</Wrapper>
+									<BoxSpace />
+								</Fragment>
+							);
+						}}
+					/>
+					{showFertilizer && (
+						<>
+							<BoxSpace B />
+							<Fertilizer scores={scoreObject} plant={plant} />
+						</>
+					)}
+				</ScrollView>
+			</Body>
+		</Container>
+	);
+};
+
+export default Calculated;
+
+export const generateScores = (
+	params: InputForm,
+	plant: InputForm['plant'],
+) => {
 	const {
 		n,
 		k,
@@ -45,7 +110,6 @@ const Calculated = () => {
 		// quantitative,
 		// location,
 	} = params;
-
 	const calcCriteria = criteria.reduce((ret, item) => {
 		const {K1, K2, N1, N2, P1, P2, name, score} = item;
 		if (n >= N1 && n <= N2) ret.Natrium = ['Natrium', name, score];
@@ -104,97 +168,24 @@ const Calculated = () => {
 	const textureLevel =
 		calcQualitative >= 7 ? 'Baik' : calcQualitative >= 3 ? 'Sedang' : 'Kurang';
 
-	const scores = Object.values({
-		calcCurah,
-		calcSuhu,
-		calcKetinggian,
-		calcQualitative: ['Tekstur Tanah', textureLevel, calcQualitative] as [
-			string,
-			string,
-			number,
-		],
-		calcSoilMoisture,
-		...calcCriteria,
-		calcBO,
-		calcCOrg,
-		calcPH,
-	});
-
-	const [_resultScore, resultTxt] = generate(
-		scores.map(([, , score]) => score),
-	);
-
-	return (
-		<Container>
-			<Header
-				textProps={{alignCenter: true}}
-				title={plant.name}
-				onPressLeft={navigation.goBack}
-			/>
-			<Body>
-				<ScrollView>
-					<Plants onChange={setPlant} plant={plant} />
-					<BoxSpace B />
-					<Text alignCenter variant={TYPOGRAPHY.headline1}>
-						{resultTxt}
-					</Text>
-					<BoxSpace B />
-					<FlatList
-						data={scores}
-						renderItem={({item}) => {
-							const [name, level, valNum] = item;
-							const colours = [COLORS.PINK, COLORS.YELLOW, COLORS.TURQUOISE];
-							const rainbow = new Rainbow({colours, min: 0, max: 10});
-
-							const color = `#${rainbow.colorAt(valNum)}` as COLORS;
-
-							return (
-								<Fragment>
-									<Wrapper>
-										<Text>{name}</Text>
-										<Text
-											backgroundColor={color}
-											color={COLORS.WHITE}>{` ${level} `}</Text>
-									</Wrapper>
-									<BoxSpace />
-								</Fragment>
-							);
-						}}
-					/>
-				</ScrollView>
-			</Body>
-		</Container>
-	);
-};
-
-export default Calculated;
-
-const generate = (scores: number[]): [number, string] => {
-	/**
-	 * 0	-	40	tidak cocok
-	 * 41 - 70	sesuai bersyarat
-	 * 70 >			sesuai
-	 *
-	 * 41	-	100	muncul rekomendasi pupuk
-	 */
-
-	const result = eval(scores.map(y => y / (10 / scores.length)).join('+'));
-	return result > 70
-		? [result, 'Sesuai']
-		: result >= 40
-		? [result, 'Sesuai Bersyarat']
-		: [result, 'Tidak Sesuai'];
-};
-
-const calculateScore = (
-	name: string,
-	value: number,
-	min: number,
-	max?: number,
-): [string, string, number] => {
-	return value >= min && value <= (max ?? min)
-		? [name, 'Baik', 10]
-		: value > max
-		? [name, 'Lebih', 0]
-		: [name, 'Kurang', 0];
+	return {
+		scoreObject: {
+			calcCurah,
+			calcSuhu,
+			calcKetinggian,
+			calcQualitative: ['Tekstur Tanah', textureLevel, calcQualitative] as [
+				string,
+				string,
+				number,
+			],
+			calcSoilMoisture,
+			...calcCriteria,
+			calcBO,
+			calcCOrg,
+			calcPH,
+		},
+		get scoreArray() {
+			return Object.values(this.scoreObject);
+		},
+	};
 };

@@ -24,6 +24,7 @@
       "@recoils/*": ["./recoils/*"],
       "@services/*": ["./services/*"],
       "@screens/*": ["./screens/*"],
+      "@utils": ["./utils"],
       "@utils/*": ["./utils/*"],
       "@interfaces": ["./types"],
       "@interfaces/*": ["./types/*"]

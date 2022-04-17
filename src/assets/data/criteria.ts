@@ -7,6 +7,7 @@ type E = {
 	K2: number;
 	name: string;
 	score: number;
+	fertilizerPercent: number;
 };
 
 const veryLow: E = {
@@ -18,6 +19,7 @@ const veryLow: E = {
 	P2: 9,
 	K1: 0,
 	K2: 9,
+	fertilizerPercent: 1,
 };
 
 const low: E = {
@@ -29,6 +31,7 @@ const low: E = {
 	P2: 20,
 	K1: 10,
 	K2: 20,
+	fertilizerPercent: 1,
 };
 
 const medium: E = {
@@ -40,6 +43,7 @@ const medium: E = {
 	P2: 40,
 	K1: 21,
 	K2: 40,
+	fertilizerPercent: 0.5,
 };
 
 const high: E = {
@@ -51,6 +55,7 @@ const high: E = {
 	P2: 60,
 	K1: 41,
 	K2: 60,
+	fertilizerPercent: 0.2,
 };
 
 const veryHigh: E = {
@@ -62,6 +67,7 @@ const veryHigh: E = {
 	P2: 100,
 	K1: 61,
 	K2: 100,
+	fertilizerPercent: 0.2,
 };
 
 const criteria = [veryLow, low, medium, high, veryHigh].reverse();

@@ -7,7 +7,7 @@ export type SoilTextureProps = {
 
 export type Texture = 'debu' | 'liat' | 'pasir' | 'lempung';
 
-type PlantRequirement = {
+export type PlantRequirement = {
 	image: unknown;
 	name: string;
 	rainFallMin: number;
@@ -26,6 +26,7 @@ type PlantRequirement = {
 	P: number;
 	K: number;
 };
+
 const tomato: PlantRequirement = {
 	image: images.tomato,
 	name: 'Tomat',
@@ -45,6 +46,7 @@ const tomato: PlantRequirement = {
 	P: 200,
 	K: 250,
 };
+
 const chili: PlantRequirement = {
 	image: images.chili,
 	name: 'Lombok',
@@ -64,6 +66,7 @@ const chili: PlantRequirement = {
 	P: 50,
 	K: 100,
 };
+
 const beans: PlantRequirement = {
 	image: images.beans,
 	name: 'Buncis',
@@ -83,6 +86,7 @@ const beans: PlantRequirement = {
 	P: 2.5,
 	K: 6.6,
 };
+
 const peanuts: PlantRequirement = {
 	image: images.peanuts,
 	name: 'Kacang tanah',
@@ -102,6 +106,7 @@ const peanuts: PlantRequirement = {
 	P: 45,
 	K: 30,
 };
+
 const mungBean: PlantRequirement = {
 	image: images.mungBean,
 	name: 'Kacang hijau',
