@@ -4,13 +4,9 @@ import {StatusBar} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import {COLORS} from '@constants/colors';
-import {InputForm} from '@interfaces';
-import Calculated from '@screens/Calculated';
-import FormInput from '@screens/FormInput';
 
 export type RootStackParamList = {
-	FormInput: undefined;
-	Calculated: InputForm;
+	App: undefined;
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -29,13 +25,8 @@ const RootNavigator = () => {
 					headerTitleAlign: 'center',
 				}}>
 				<RootStack.Screen
-					name="FormInput"
-					component={FormInput}
-					options={{headerShown: false}}
-				/>
-				<RootStack.Screen
-					name="Calculated"
-					component={Calculated}
+					name="App"
+					component={noop}
 					options={{headerShown: false}}
 				/>
 			</RootStack.Navigator>
