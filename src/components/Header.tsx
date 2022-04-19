@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 		minHeight: '8%',
 		maxHeight: '8%',
 		paddingHorizontal: SIZES.content,
-		backgroundColor: COLORS.WHITE,
+		backgroundColor: COLORS.GREEN,
 		borderBottomColor: COLORS.BLACK50,
 		borderBottomWidth: SIZES.outline,
 	},

@@ -1,25 +1,41 @@
 import React, {useLayoutEffect} from 'react';
+import {StatusBar} from 'react-native';
 
-import {Body, Container, Text} from '@components';
+import RNSplashScreen from 'react-native-splash-screen';
+
+import images from '@assets/images';
+import {Body, BoxSpace, Container, Image, Text, View} from '@components';
+import {COLORS} from '@constants/colors';
+import {SIZES} from '@constants/sizes';
+import {TYPOGRAPHY} from '@constants/typography';
 import {useScreenProps} from '@hooks';
 
-const Splashscreen = () => {
-	const [navigation] = useScreenProps('Splashscreen');
+const SplashScreen = () => {
+	const [navigation] = useScreenProps('SplashScreen');
 
 	useLayoutEffect(() => {
-		// RNSplashscreen.hide();
+		RNSplashScreen.hide();
 		setTimeout(() => {
-			// navigation.reset({index: 1, routes: [{name: 'FormInput'}]});
+			navigation.reset({index: 1, routes: [{name: 'FormInput'}]});
 		}, 2500);
 	}, []);
 
 	return (
 		<Container>
-			<Body itemsCenter justifyCenter>
-				<Text>Splash</Text>
+			<StatusBar backgroundColor={COLORS.GREEN} barStyle="light-content" />
+			<Body backgroundColor={COLORS.GREEN} itemsCenter justifyCenter>
+				<View width="65%">
+					<Image source={images.splashScreen} />
+				</View>
+				<BoxSpace G />
+				<BoxSpace G />
+				<BoxSpace G />
+				<Text variant={TYPOGRAPHY.body1} color={COLORS.WHITE}>
+					Melinda R.S Moata, PhD
+				</Text>
 			</Body>
 		</Container>
 	);
 };
 
-export default Splashscreen;
+export default SplashScreen;

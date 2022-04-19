@@ -1,4 +1,5 @@
 export enum COLORS {
+	GREEN = '#365337',
 	YELLOW = '#FFDD00',
 	YELLOW75 = '#FFEE80',
 	YELLOW10 = '#FFF7BF',

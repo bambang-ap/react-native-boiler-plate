@@ -1,1 +1,8 @@
 - [ ] indikasikan rekomendasi berdasarkan score
+- [ ] Tulisan / font nya di gedein lagi  utk jenis tanaman tapi dikecilkan utk jenis tekstur1. 
+- [ ] Bagian BO( bahan organik) 0 - 30% range nya 
+- [ ] Pupuk kimia satuan kg/ ha smtra  pupuk Organik  satuan ton/ha
+- [ ] Bagian setelah input data ada button untuk di klik baru masuk ke bagian slide scroll, khusus utk jenis pupuk buat tombol pilihan mis: pilih pupuk Urea baru muncul brp angkanya.
+- [ ] Output rekomendasi perbaikan lahan: perbaiki irigasi, penggunaan mulsa, Pemupukan kimia, pemupukan organik
+- [ ] Pupuk organik dan bahan organik itu Beda 
+- [x] Dan dari masuk nya logo dan  tulisan nama peneliti: Melinda R.S Moata, PhD

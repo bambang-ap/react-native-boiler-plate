@@ -7,10 +7,10 @@ import {COLORS} from '@constants/colors';
 import {InputForm} from '@interfaces';
 import Calculated from '@screens/Calculated';
 import FormInput from '@screens/FormInput';
-import Splashscreen from '@screens/Splashscreen';
+import SplashScreen from '@screens/SplashScreen';
 
 export type RootStackParamList = {
-	Splashscreen: undefined;
+	SplashScreen: undefined;
 	FormInput: undefined;
 	Calculated: InputForm;
 };
@@ -20,7 +20,6 @@ const RootStack = createStackNavigator<RootStackParamList>();
 const RootNavigator = () => {
 	return (
 		<>
-			<StatusBar backgroundColor={COLORS.WHITE} barStyle="dark-content" />
 			<RootStack.Navigator
 				screenOptions={{
 					headerStyle: {
@@ -31,8 +30,8 @@ const RootNavigator = () => {
 					headerTitleAlign: 'center',
 				}}>
 				<RootStack.Screen
-					name="Splashscreen"
-					component={Splashscreen}
+					name="SplashScreen"
+					component={SplashScreen}
 					options={{headerShown: false}}
 				/>
 				<RootStack.Screen
