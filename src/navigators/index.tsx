@@ -20,6 +20,7 @@ const RootStack = createStackNavigator<RootStackParamList>();
 const RootNavigator = () => {
 	return (
 		<>
+			<StatusBar backgroundColor={COLORS.GREEN} barStyle="light-content" />
 			<RootStack.Navigator
 				screenOptions={{
 					headerStyle: {
