@@ -7,8 +7,10 @@ import {COLORS} from '@constants/colors';
 import {InputForm} from '@interfaces';
 import Calculated from '@screens/Calculated';
 import FormInput from '@screens/FormInput';
+import Splashscreen from '@screens/Splashscreen';
 
 export type RootStackParamList = {
+	Splashscreen: undefined;
 	FormInput: undefined;
 	Calculated: InputForm;
 };
@@ -28,6 +30,11 @@ const RootNavigator = () => {
 					},
 					headerTitleAlign: 'center',
 				}}>
+				<RootStack.Screen
+					name="Splashscreen"
+					component={Splashscreen}
+					options={{headerShown: false}}
+				/>
 				<RootStack.Screen
 					name="FormInput"
 					component={FormInput}

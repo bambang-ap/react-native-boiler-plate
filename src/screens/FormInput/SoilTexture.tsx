@@ -47,33 +47,37 @@ const SoilTexture = (props: {onChange: (value: SoilTextureProps) => void}) => {
 
 	const renderQualitative = type === 'qualitative' && (
 		<>
-			<Button
-				flx
-				variant={qualitativeVariant(0)}
-				onPress={() => toggleQualitative(0)}>
-				Pasir
-			</Button>
-			<BoxSpace />
-			<Button
-				flx
-				variant={qualitativeVariant(1)}
-				onPress={() => toggleQualitative(1)}>
-				Debu
-			</Button>
-			<BoxSpace />
-			<Button
-				flx
-				variant={qualitativeVariant(2)}
-				onPress={() => toggleQualitative(2)}>
-				Liat
-			</Button>
-			<BoxSpace />
-			<Button
-				flx
-				variant={qualitativeVariant(3)}
-				onPress={() => toggleQualitative(3)}>
-				Lempung
-			</Button>
+			<Wrapper>
+				<Button
+					flx
+					variant={qualitativeVariant(0)}
+					onPress={() => toggleQualitative(0)}>
+					Pasir
+				</Button>
+				<BoxSpace />
+				<Button
+					flx
+					variant={qualitativeVariant(1)}
+					onPress={() => toggleQualitative(1)}>
+					Debu
+				</Button>
+			</Wrapper>
+			<BoxSpace B />
+			<Wrapper>
+				<Button
+					flx
+					variant={qualitativeVariant(2)}
+					onPress={() => toggleQualitative(2)}>
+					Liat
+				</Button>
+				<BoxSpace />
+				<Button
+					flx
+					variant={qualitativeVariant(3)}
+					onPress={() => toggleQualitative(3)}>
+					Lempung
+				</Button>
+			</Wrapper>
 		</>
 	);
 
@@ -137,7 +141,7 @@ const SoilTexture = (props: {onChange: (value: SoilTextureProps) => void}) => {
 				<BoxSpace B /> */}
 				<View flx>
 					{renderQuantitative}
-					<Wrapper>{renderQualitative}</Wrapper>
+					{renderQualitative}
 				</View>
 			</Wrapper>
 			<BoxSpace B />
