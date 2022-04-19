@@ -20,7 +20,7 @@ export enum ButtonVariant {
 
 export const buttonVariant = (index: ButtonVariant) => {
 	const listStyles = [
-		[COLORS.PINK, COLORS.WHITE],
+		[COLORS.GREEN, COLORS.WHITE],
 		[COLORS.BLACK50, COLORS.WHITE],
 		[COLORS.TURQUOISE, COLORS.WHITE],
 		[COLORS.PINK75, COLORS.BLACK100],
@@ -50,7 +50,7 @@ export const Button = forwardRef<TouchableOpacity, ButtonProps>(
 			children,
 			textProps,
 			textStyle,
-			variantText = TYPOGRAPHY.headline4,
+			variantText = TYPOGRAPHY.headline5,
 			...rest
 		} = restProps;
 

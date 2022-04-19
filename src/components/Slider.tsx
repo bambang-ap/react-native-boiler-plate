@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 import RNSlider from '@react-native-community/slider';
 
@@ -10,6 +10,7 @@ type SliderProps = {
 	title: string;
 	step: number;
 	value: number;
+	fixed?: number;
 	minMax: [number, number];
 	onChange?: (value: number) => void;
 };
@@ -19,13 +20,16 @@ export const Slider = (props: SliderProps) => {
 		step,
 		value,
 		title,
+		fixed,
 		onChange,
 		withoutValue,
 		minMax: [min, max],
 	} = props;
 
+	const sectionProps = {title, value, fixed, withoutValue};
+
 	return (
-		<Section title={title} value={value} withoutValue={withoutValue}>
+		<Section {...sectionProps}>
 			<RNSlider
 				step={step}
 				value={value}
@@ -33,7 +37,7 @@ export const Slider = (props: SliderProps) => {
 				maximumValue={max}
 				minimumTrackTintColor={COLORS.TURQUOISE}
 				maximumTrackTintColor={COLORS.TURQUOISE}
-				thumbTintColor={COLORS.PINK}
+				thumbTintColor={COLORS.GREEN}
 				onSlidingComplete={onChange}
 				onValueChange={onChange}
 			/>

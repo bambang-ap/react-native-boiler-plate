@@ -41,11 +41,7 @@ const Calculated = () => {
 
 	return (
 		<Container>
-			<Header
-				textProps={{alignCenter: true}}
-				title={plant.name}
-				onPressLeft={navigation.goBack}
-			/>
+			<Header title={plant.name} onPressLeft={navigation.goBack} />
 			<Body>
 				<ScrollView>
 					<Plants onChange={setPlant} plant={plant} />
@@ -58,7 +54,7 @@ const Calculated = () => {
 						data={scores}
 						renderItem={({item}) => {
 							const [name, level, valNum] = item;
-							const colours = [COLORS.PINK, COLORS.YELLOW, COLORS.TURQUOISE];
+							const colours = [COLORS.PINK, COLORS.YELLOW, COLORS.GREEN];
 							const rainbow = new Rainbow({colours, min: 0, max: 10});
 
 							const color = `#${rainbow.colorAt(valNum)}` as COLORS;

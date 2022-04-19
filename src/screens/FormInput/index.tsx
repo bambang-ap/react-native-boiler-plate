@@ -16,7 +16,7 @@ import {
 	Text,
 	Header,
 } from '@components';
-import {INPUT_FORM} from '@constants';
+import {appJson, INPUT_FORM} from '@constants';
 import {useScreenProps} from '@hooks';
 import {InputForm} from '@interfaces';
 
@@ -32,12 +32,10 @@ const FormInput = () => {
 			<Header
 				renderAccessoryLeft={noop}
 				textProps={{alignCenter: true}}
-				title="Smart Dryland Agroecosystem"
+				title={appJson.displayName}
 			/>
 			<Body>
 				<ScrollView>
-					<Text>Tanaman</Text>
-					<BoxSpace />
 					<Plants onChange={plant => setState({plant})} plant={state.plant} />
 					<BoxSpace />
 					<Section title="Lokasi">
@@ -78,6 +76,7 @@ const FormInput = () => {
 					/>
 					<Slider
 						step={0.1}
+						fixed={1}
 						minMax={[0, 5]}
 						value={state.n}
 						title="Nitrogen (%)"
@@ -100,7 +99,7 @@ const FormInput = () => {
 					<Slider
 						title="Bahan Organik (%)"
 						step={1}
-						minMax={[0, 200]}
+						minMax={[0, 50]}
 						value={state.organic}
 						onChange={organic => setState({organic})}
 					/>
@@ -114,6 +113,7 @@ const FormInput = () => {
 					<Slider
 						title="pH"
 						step={0.1}
+						fixed={1}
 						minMax={[0, 14]}
 						value={state.pH}
 						onChange={pH => setState({pH})}

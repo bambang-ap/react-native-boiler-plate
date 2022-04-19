@@ -29,11 +29,15 @@ export const Header: React.FC<Props> = props => {
 			{LAcc ? (
 				<LAcc />
 			) : (
-				<IconHeader onPress={onPressLeft} name="chevron-left" />
+				<IconHeader
+					color={COLORS.WHITE}
+					onPress={onPressLeft}
+					name="chevron-left"
+				/>
 			)}
 			<BoxSpace B />
 			{children || (
-				<TextHeader flx {...textProps}>
+				<TextHeader color={COLORS.WHITE} flx {...textProps}>
 					{title?.toUpperCase()}
 				</TextHeader>
 			)}

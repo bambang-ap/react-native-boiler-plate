@@ -1,6 +1,8 @@
 import plants from '@assets/data/plants';
 import {InputForm} from '@interfaces';
 
+import app from '../../app.json';
+
 export const INPUT_FORM: InputForm = {
 	location: '',
 	qualitative: [false, false, false, false],
@@ -18,3 +20,5 @@ export const INPUT_FORM: InputForm = {
 	pH: 7,
 	soilMoisture: 0,
 };
+
+export const appJson = app;

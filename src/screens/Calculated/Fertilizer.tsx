@@ -54,9 +54,12 @@ const Fertilizer = ({scores, plant}: Props) => {
 		'Kandang Babi': ((N / 0.5) * 100) / 1000,
 	};
 
+	const keyChemical = 'Pupuk Kimia (kg/ha)';
+	const keyOrganic = 'Pupuk Organik (ton/ha)';
+
 	const result = Object.entries({
-		'Pupuk Kimia': Object.entries(chemicalFertilizer),
-		'Pupuk Organik': Object.entries(organicFertilizer),
+		[keyChemical]: Object.entries(chemicalFertilizer),
+		[keyOrganic]: Object.entries(organicFertilizer),
 	});
 
 	return (
