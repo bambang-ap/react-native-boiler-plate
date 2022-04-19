@@ -22,7 +22,6 @@ const SplashScreen = () => {
 
 	return (
 		<Container>
-			<StatusBar backgroundColor={COLORS.GREEN} barStyle="light-content" />
 			<Body backgroundColor={COLORS.GREEN} itemsCenter justifyCenter>
 				<BoxSpace G />
 				<BoxSpace D />
