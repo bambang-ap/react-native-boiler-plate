@@ -16,7 +16,6 @@ export type FlatListProps<T> = {
 	renderItem: (itemInfo: ItemInfo<T>) => JSX.Element;
 } & Omit<RNFlatListProps<T>, 'renderItem'>;
 
-// eslint-disable-next-line @typescript-eslint/comma-dangle
 const FlatListCore = <T,>(
 	props: FlatListProps<T>,
 	ref: React.ForwardedRef<RNFlatList>,

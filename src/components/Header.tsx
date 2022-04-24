@@ -1,12 +1,10 @@
 import * as React from 'react';
 import {StyleSheet} from 'react-native';
 
-import {BoxSpace, Wrapper, Text, TextProps, IconProps} from '@components';
+import {BoxSpace, Wrapper, Text, TextProps, Icon, IconProps} from '@components';
 import {COLORS} from '@constants/colors';
 import {SIZES, TEXT_SIZES} from '@constants/sizes';
 import {TYPOGRAPHY} from '@constants/typography';
-
-import Icon from './Icon';
 
 type Props = {
 	title?: string;
@@ -15,6 +13,7 @@ type Props = {
 	renderAccessoryLeft?: () => JSX.Element;
 	renderAccessoryRight?: () => JSX.Element;
 };
+
 export const Header: React.FC<Props> = props => {
 	const {
 		title,

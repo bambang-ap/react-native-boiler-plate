@@ -1,14 +1,7 @@
 import React, {Fragment, useState} from 'react';
 
 import criteria from '@assets/data/criteria';
-import {
-	BoxSpace,
-	Button,
-	ButtonVariant,
-	FlatList,
-	Text,
-	Wrapper,
-} from '@components';
+import {BoxSpace, Button, ButtonVariant, Text, Wrapper} from '@components';
 import {InputForm} from '@interfaces';
 
 import {generateScores} from './';
@@ -28,12 +21,12 @@ const Fertilizer = ({scores, plant}: Props) => {
 
 	const {N, P, K} = plant;
 	const {
-		Natrium: [, , Natrium],
+		Nitrogen: [, , Nitrogen],
 		Fosfor: [, , Fosfor],
 		Kalium: [, , Kalium],
 	} = scores;
 	const [N1, P1, K1] = [
-		numPercentage(N, Natrium),
+		numPercentage(N, Nitrogen),
 		numPercentage(P, Fosfor),
 		numPercentage(K, Kalium),
 	];

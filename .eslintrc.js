@@ -34,6 +34,8 @@ module.exports = {
 				leadingUnderscore: 'allow',
 			},
 		],
+		'comma-dangle': 0,
+		'@typescript-eslint/comma-dangle': 0,
 		'@typescript-eslint/object-curly-spacing': 0,
 		'@typescript-eslint/indent': 0,
 		'import/prefer-default-export': 0,

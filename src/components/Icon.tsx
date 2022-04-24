@@ -19,7 +19,7 @@ export type IconProps = {
 	activeOpacity?: number;
 };
 
-const Icon = (props: IconProps) => {
+export const Icon = (props: IconProps) => {
 	const {
 		name,
 		onPress,
@@ -42,5 +42,3 @@ const Icon = (props: IconProps) => {
 		icon
 	);
 };
-
-export default Icon;

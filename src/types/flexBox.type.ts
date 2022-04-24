@@ -62,6 +62,8 @@ export type Position = Partial<ObjFromTuple<'relative' | 'absolute'>> &
 export type Flex = Partial<ObjFromTuple<'row' | 'col' | 'reverse'>> & {
 	/** flex true = 1 */
 	flx?: boolean | number;
+	padding?: number;
+	margin?: number;
 	wrap?: ViewStyle['flexWrap'] | boolean;
 	direction?: ViewStyle['flexDirection'];
 };
@@ -83,6 +85,8 @@ export type FlexAll = Position &
 
 export const getFlexBox = <D extends FlexAll>(props: D) => {
 	const {
+		padding,
+		margin,
 		width,
 		height,
 		direction,
@@ -146,6 +150,8 @@ export const getFlexBox = <D extends FlexAll>(props: D) => {
 		left,
 		right,
 		bottom,
+		padding,
+		margin,
 		flexWrap: typeof wrap === 'boolean' ? (wrap ? 'wrap' : undefined) : wrap,
 		borderRadius: radius,
 		get textAlign() {
@@ -178,6 +184,7 @@ export const getFlexBox = <D extends FlexAll>(props: D) => {
 			if (direction) return direction;
 			if (row) return reverse ? 'row-reverse' : 'row';
 			if (reverse) return 'column-reverse';
+			return undefined;
 		},
 		get position() {
 			if (absolute) return 'absolute';

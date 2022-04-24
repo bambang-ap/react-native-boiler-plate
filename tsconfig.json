@@ -16,6 +16,7 @@
     "paths": {
       "@assets/*": ["./assets/*"],
       "@components": ["./components"],
+      "@components/*": ["./components/*"],
       "@constants": ["./constants"],
       "@constants/*": ["./constants/*"],
       "@hooks": ["./hooks"],

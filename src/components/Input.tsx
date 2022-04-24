@@ -1,79 +1,94 @@
-import React, {forwardRef, useState} from 'react';
-import {TextInput, StyleProp, ViewStyle, TextInputProps} from 'react-native';
+import * as React from 'react';
+import {StyleSheet, TextInput, TextInputProps} from 'react-native';
 
-import {BoxSpace, TextVariant, View, ViewProps, Wrapper} from '@components';
+import {BoxSpace, ViewProps, Wrapper} from '@components';
 import {COLORS} from '@constants/colors';
 import {SIZES} from '@constants/sizes';
-import {typographyStyle} from '@constants/typography';
+import {TYPOGRAPHY, typographyStyle} from '@constants/typography';
 
-export type InputProps = TextVariant &
-	TextInputProps & {
-		color?: COLORS;
-		flx?: ViewProps['flx'];
-		containerStyle?: StyleProp<ViewStyle>;
-		containerProps?: Omit<ViewProps, 'flx' | 'style' | 'children'>;
-		renderLeftAccessory?: () => JSX.Element;
-		renderRightAccessory?: () => JSX.Element;
-	};
+export type InputProps = {
+	error?: boolean;
+	flex?: boolean;
+	variant?: TYPOGRAPHY;
+	containerProps?: Omit<ViewProps, 'style' | 'flex'>;
+	containerStyle?: ViewProps['style'];
+	renderAccessoryLeft?: () => JSX.Element;
+	renderAccessoryRight?: () => JSX.Element;
+} & TextInputProps;
+type InputRef = React.ForwardedRef<TextInput>;
 
-export const Input = forwardRef<TextInput, InputProps>((props, ref) => {
+export const Input = React.forwardRef((props: InputProps, ref: InputRef) => {
 	const {
-		flx,
+		error,
+		flex,
 		style,
-		variant,
+		variant = TYPOGRAPHY.body4,
 		containerProps,
 		containerStyle,
-		color = COLORS.BLACK100,
-		renderLeftAccessory: LAcc,
-		renderRightAccessory: RAcc,
+		renderAccessoryLeft,
+		renderAccessoryRight,
 		...rest
 	} = props;
+
+	const variantStyle = TYPOGRAPHY[variant] ?? {};
+
+	const leftAcc = renderAccessoryLeft && (
+		<>
+			{renderAccessoryLeft?.()}
+			<BoxSpace B />
+		</>
+	);
+
+	const rightAcc = renderAccessoryRight && (
+		<>
+			<BoxSpace B />
+			{renderAccessoryRight?.()}
+		</>
+	);
+
 	return (
 		// @ts-ignore
 		<Wrapper
-			{...containerProps}
-			flx={flx}
+			flx={flex}
 			itemsCenter
-			backgroundColor={COLORS.WHITE}
 			style={[
-				{
-					minHeight: SIZES.box,
-					borderRadius: SIZES.radius,
-					borderColor: COLORS.BLACK50,
-					borderWidth: SIZES.outline,
-					paddingHorizontal: SIZES.content,
-				},
+				inputStyles.container,
 				containerStyle,
-			]}>
-			{LAcc && (
-				<>
-					<LAcc />
-					<BoxSpace B />
-				</>
-			)}
-			<View flx>
-				<TextInput
-					{...rest}
-					ref={ref}
-					style={[
-						{
-							color,
-							padding: 0,
-							includeFontPadding: false,
-							...typographyStyle(variant),
-						},
-						style,
-					]}
-				/>
-			</View>
-			{RAcc && (
-				<>
-					<BoxSpace B />
-					<RAcc />
-				</>
-			)}
+				error ? {borderColor: COLORS.PINK} : {},
+			]}
+			{...containerProps}>
+			{leftAcc}
+			<TextInput
+				ref={ref}
+				style={[
+					inputStyles.textInput,
+					variantStyle,
+					style,
+					typographyStyle(variant),
+				]}
+				{...rest}
+			/>
+			{rightAcc}
 		</Wrapper>
 	);
+});
+
+export const inputStyles = StyleSheet.create({
+	container: {
+		minHeight: SIZES.box,
+		borderRadius: SIZES.radius,
+		overflow: 'hidden',
+		paddingHorizontal: SIZES.content,
+		backgroundColor: COLORS.BLACK12,
+		borderWidth: SIZES.outline,
+		borderColor: COLORS.BLACK20,
+	},
+
+	textInput: {
+		padding: 0,
+		flex: 1,
+		color: COLORS.BLACK100,
+	},
 });
 
 type InputNumberProps = Omit<
@@ -85,10 +100,10 @@ type InputNumberProps = Omit<
 	onChangeText?: (value: number) => void;
 };
 
-export const InputNumber = forwardRef<TextInput, InputNumberProps>(
+export const InputNumber = React.forwardRef<TextInput, InputNumberProps>(
 	(props, ref) => {
 		const {value, withDecimal, onChangeText, ...rest} = props;
-		const [val, setVal] = useState(value?.toString());
+		const [val, setVal] = React.useState(value?.toString());
 		const onChange = (txt: string) => {
 			const [left, ...right] = txt.replace(/[^0-9\.]+/g, '').split('.');
 			const formattedVal = !withDecimal

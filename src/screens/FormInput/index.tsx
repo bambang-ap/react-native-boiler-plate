@@ -1,7 +1,6 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
 
-import {Plants} from 'components/app';
 import {useStateObject} from 'global-methods/hooks';
 
 import {
@@ -13,9 +12,9 @@ import {
 	Input,
 	Section,
 	Slider,
-	Text,
 	Header,
 } from '@components';
+import {Plants} from '@components/app';
 import {appJson, INPUT_FORM} from '@constants';
 import {useScreenProps} from '@hooks';
 import {InputForm} from '@interfaces';

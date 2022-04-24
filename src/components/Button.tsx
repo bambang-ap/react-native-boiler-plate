@@ -26,7 +26,7 @@ export const buttonVariant = (index: ButtonVariant) => {
 		[COLORS.PINK75, COLORS.BLACK100],
 		[COLORS.YELLOW75, COLORS.BLACK100],
 		[COLORS.TURQUOISE75, COLORS.BLACK100],
-		[COLORS.BLACK20, COLORS.BLACK100],
+		[COLORS.BLACK12, COLORS.BLACK100],
 		[COLORS.BLACK90, COLORS.WHITE],
 	] as const;
 	return listStyles[index ?? ButtonVariant.primary];

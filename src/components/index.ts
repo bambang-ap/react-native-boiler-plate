@@ -22,6 +22,8 @@ export * from './Image';
 export * from './Input';
 export * from './Section';
 export * from './Slider';
+export * from './Modal';
+export * from './Select';
 
 export type BgColor = {backgroundColor?: COLORS};
 export type TextVariant = {variant?: TYPOGRAPHY};
@@ -68,6 +70,11 @@ export const Container = styled(View)({
 export const Body = styled(View)({
 	flex: 1,
 	padding: SIZES.content,
+});
+
+export const Separator = styled(View)({
+	padding: 1,
+	backgroundColor: COLORS.BLACK20,
 });
 
 export const Wrapper = styled(View)({
