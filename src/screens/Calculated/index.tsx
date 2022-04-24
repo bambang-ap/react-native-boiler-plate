@@ -41,9 +41,11 @@ const Calculated = () => {
 		scores.map(([, , score]) => score),
 	);
 
+	const title = `${plant.name} - ${params.location}`;
+
 	return (
 		<Container>
-			<Header title={plant.name} onPressLeft={navigation.goBack} />
+			<Header title={title} onPressLeft={navigation.goBack} />
 			<Body>
 				<ScrollView>
 					<Plants onChange={setPlant} plant={plant} />

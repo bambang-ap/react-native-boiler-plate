@@ -36,7 +36,7 @@ export const Header: React.FC<Props> = props => {
 			)}
 			<BoxSpace B />
 			{children || (
-				<TextHeader color={COLORS.WHITE} flx {...textProps}>
+				<TextHeader numberOfLines={1} color={COLORS.WHITE} flx {...textProps}>
 					{title?.toUpperCase()}
 				</TextHeader>
 			)}
