@@ -97,15 +97,17 @@ const FormInput = () => {
 					/>
 					<Slider
 						title="Bahan Organik (%)"
-						step={1}
-						minMax={[0, 50]}
+						step={0.1}
+						fixed={1}
+						minMax={[0, 20]}
 						value={state.organic}
 						onChange={organic => setState({organic})}
 					/>
 					<Slider
 						title="C-Org (%)"
-						step={1}
-						minMax={[0, 50]}
+						step={0.1}
+						fixed={1}
+						minMax={[0, 10]}
 						value={state.cOrg}
 						onChange={cOrg => setState({cOrg})}
 					/>

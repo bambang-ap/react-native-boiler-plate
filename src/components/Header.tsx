@@ -62,9 +62,9 @@ const styles = StyleSheet.create({
 
 export const TextHeader = (props: TextProps) => {
 	// @ts-ignore
-	return <Text {...props} variant={TYPOGRAPHY.headline3} />;
+	return <Text {...props} variant={TYPOGRAPHY.headline4} />;
 };
 
 export const IconHeader = (props: Omit<IconProps, 'size'>) => {
-	return <Icon size={TEXT_SIZES.t_headline_3} {...props} />;
+	return <Icon size={TEXT_SIZES.t_headline_4} {...props} />;
 };

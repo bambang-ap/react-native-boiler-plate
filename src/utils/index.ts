@@ -39,9 +39,9 @@ export const calculateScore = (
 	switch (key) {
 		case 'rainFall':
 			recommend = [
-				'Perbanyak pupuk organik',
-				'Cukup pupuk organik',
-				'Sedikit pupuk organik',
+				'Perhatikan irigasi',
+				'Perhatikan irigasi',
+				'Perhatikan irigasi',
 			];
 			return ['Curah Hujan', result, score, recommend[i]];
 		case 'temp':
@@ -83,7 +83,11 @@ export const calculateScore = (
 		case 'soilMoisture':
 			const additionalCondition =
 				(score >= 10 && score <= 19) || (score >= 31 && score <= 70);
-			recommend = ['Gunakan mulsa', 'Gunakan mulsa', 'Tanpa mulsa'];
+			recommend = [
+				'Gunakan banyak mulsa',
+				'Gunakan sedikit mulsa',
+				'Tanpa mulsa',
+			];
 			if (additionalCondition)
 				return ['Kelembaban Tanah', 'Sedang', 5, recommend[i]];
 			return ['Kelembaban Tanah', result, score, recommend[i]];
@@ -97,13 +101,13 @@ export const calculateScore = (
 		case 'cOrg':
 			return ['C-Org', result, score, null];
 		case 'pH':
-			const a =
-				value >= 7.6
-					? value >= 6.5 && value <= 7.5
-						? null
-						: 'Tambah Kapur'
-					: 'Tambah Belerang';
-			return ['pH', result, score, a];
+			const c =
+				value >= 0 && value <= 6.5
+					? 'Tambah Kapur'
+					: value >= 7.6
+					? 'Tambah Belerang'
+					: null;
+			return ['pH', result, score, c];
 		default:
 			return ['', '', 0, null];
 	}

@@ -41,7 +41,9 @@ const Calculated = () => {
 		scores.map(([, , score]) => score),
 	);
 
-	const title = `${plant.name} - ${params.location}`;
+	const title = `${plant.name}${
+		params.location ? ` - ${params.location}` : ''
+	}`;
 
 	return (
 		<Container>
