@@ -1,5 +1,7 @@
 import {SoilTextureProps, Texture} from '@assets/data/plants';
 
+export * from './plant-manager';
+
 export const generate = (scores: number[]): [number, string, boolean] => {
 	const result = eval(scores.map(y => y / (10 / scores.length)).join('+'));
 	return result > 70

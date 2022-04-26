@@ -13,6 +13,7 @@ import {
 	Separator,
 	inputStyles,
 	ButtonVariant,
+	InputProps,
 } from '@components';
 import {COLORS} from '@constants/colors';
 import {SIZES} from '@constants/sizes';
@@ -26,6 +27,15 @@ type SelectOptionProps<D> = {
 	onSelect?: (value: D, index: number) => void;
 	selectedIndex?: number;
 	variant?: TYPOGRAPHY;
+	inputProps?: Omit<
+		InputProps,
+		| 'value'
+		| 'variant'
+		| 'editable'
+		| 'placeholder'
+		| 'containerStyle'
+		| 'renderAccessoryRight'
+	>;
 } & ViewProps;
 
 type Measures = Record<
@@ -42,6 +52,7 @@ export const Select = <D,>(props: SelectOptionProps<D>) => {
 		onSelect,
 		value,
 		variant,
+		inputProps,
 		...rest
 	} = props;
 
@@ -87,6 +98,7 @@ export const Select = <D,>(props: SelectOptionProps<D>) => {
 						placeholder={placeholder}
 						containerStyle={selectStyle.inputContainer}
 						renderAccessoryRight={() => <Icon name={icon} />}
+						{...inputProps}
 					/>
 				</TouchableOpacity>
 				{visible && <Separator />}

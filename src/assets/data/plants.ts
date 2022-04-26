@@ -1,5 +1,3 @@
-import images from '@assets/images';
-
 export type SoilTextureProps = {
 	quantitative: [debu: number, pasir: number, liat: number];
 	qualitative: [debu: boolean, pasir: boolean, liat: boolean, lempung: boolean];
@@ -8,7 +6,7 @@ export type SoilTextureProps = {
 export type Texture = 'debu' | 'liat' | 'pasir' | 'lempung';
 
 export type PlantRequirement = {
-	image: unknown;
+	image: string;
 	name: string;
 	rainFallMin: number;
 	rainFallMax: number;
@@ -16,8 +14,8 @@ export type PlantRequirement = {
 	tempMax: number;
 	heightMin: number;
 	heightMax: number;
-	textureQualitative: Texture[];
-	textureQuantitative: Record<Exclude<Texture, 'lempung'>, number>;
+	texture: string;
+	// textureQuantitative: Record<Exclude<Texture, 'lempung'>, number>;
 	organic: number;
 	COrg: number;
 	phMin: number;
@@ -28,7 +26,7 @@ export type PlantRequirement = {
 };
 
 const tomato: PlantRequirement = {
-	image: images.tomato,
+	image: 'https://i.ibb.co/NpvsnkN/tomat.png',
 	name: 'Tomat',
 	rainFallMin: 400,
 	rainFallMax: 700,
@@ -36,8 +34,8 @@ const tomato: PlantRequirement = {
 	tempMax: 24,
 	heightMin: 100,
 	heightMax: 2000,
-	textureQualitative: ['debu', 'pasir'],
-	textureQuantitative: {debu: 30, liat: 30, pasir: 40},
+	texture: 'debu,pasir',
+	// textureQuantitative: {debu: 30, liat: 30, pasir: 40},
 	organic: 2,
 	COrg: 1.2,
 	phMin: 6,
@@ -48,7 +46,7 @@ const tomato: PlantRequirement = {
 };
 
 const chili: PlantRequirement = {
-	image: images.chili,
+	image: 'https://i.ibb.co/3kypcdw/lombok.png',
 	name: 'Lombok',
 	rainFallMin: 600,
 	rainFallMax: 1200,
@@ -56,8 +54,8 @@ const chili: PlantRequirement = {
 	tempMax: 27,
 	heightMin: 1,
 	heightMax: 2000,
-	textureQualitative: ['lempung', 'debu'],
-	textureQuantitative: {debu: 30, liat: 30, pasir: 40},
+	texture: 'lempung,debu',
+	// textureQuantitative: {debu: 30, liat: 30, pasir: 40},
 	organic: 1.3,
 	COrg: 0.8,
 	phMin: 6,
@@ -68,7 +66,7 @@ const chili: PlantRequirement = {
 };
 
 const beans: PlantRequirement = {
-	image: images.beans,
+	image: 'https://i.ibb.co/HKKQjKM/buncis.png',
 	name: 'Buncis',
 	rainFallMin: 350,
 	rainFallMax: 600,
@@ -76,8 +74,8 @@ const beans: PlantRequirement = {
 	tempMax: 24,
 	heightMin: 100,
 	heightMax: 1500,
-	textureQualitative: ['lempung', 'pasir'],
-	textureQuantitative: {debu: 30, liat: 30, pasir: 40},
+	texture: 'lempung,pasir',
+	// textureQuantitative: {debu: 30, liat: 30, pasir: 40},
 	organic: 2,
 	COrg: 1.2,
 	phMin: 5.6,
@@ -88,7 +86,7 @@ const beans: PlantRequirement = {
 };
 
 const peanuts: PlantRequirement = {
-	image: images.peanuts,
+	image: 'https://i.ibb.co/pPKVSYM/kacang-tanah.png',
 	name: 'Kacang tanah',
 	rainFallMin: 450,
 	rainFallMax: 1300,
@@ -96,8 +94,8 @@ const peanuts: PlantRequirement = {
 	tempMax: 30,
 	heightMin: 100,
 	heightMax: 1500,
-	textureQualitative: ['lempung', 'debu'],
-	textureQuantitative: {debu: 30, liat: 30, pasir: 40},
+	texture: 'lempung,debu',
+	// textureQuantitative: {debu: 30, liat: 30, pasir: 40},
 	organic: 2,
 	COrg: 1.2,
 	phMin: 6,
@@ -108,7 +106,7 @@ const peanuts: PlantRequirement = {
 };
 
 const mungBean: PlantRequirement = {
-	image: images.mungBean,
+	image: 'https://i.ibb.co/ThKsyqP/kacang-hijau.png',
 	name: 'Kacang hijau',
 	rainFallMin: 450,
 	rainFallMax: 1300,
@@ -116,8 +114,8 @@ const mungBean: PlantRequirement = {
 	tempMax: 30,
 	heightMin: 100,
 	heightMax: 1500,
-	textureQualitative: ['lempung', 'debu'],
-	textureQuantitative: {debu: 30, liat: 30, pasir: 40},
+	texture: 'lempung,debu',
+	// textureQuantitative: {debu: 30, liat: 30, pasir: 40},
 	organic: 2,
 	COrg: 1.2,
 	phMin: 6,

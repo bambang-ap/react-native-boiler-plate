@@ -1,4 +1,4 @@
-import plants, {SoilTextureProps, Texture} from '@assets/data/plants';
+import plants, {SoilTextureProps} from '@assets/data/plants';
 
 export type InputForm = {
 	location: string;

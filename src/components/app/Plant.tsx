@@ -1,14 +1,19 @@
 import React from 'react';
 
-import plants from '@assets/data/plants';
-import {BoxSpace, Text, Select} from '@components';
+import {useRecoilValue} from 'recoil';
+
+import {BoxSpace, Text, Select, Image, View} from '@components';
 import {InputForm} from '@interfaces';
+import {atomPlants} from '@recoils/atom';
 
 export const Plants = (props: {
 	plant: InputForm['plant'];
 	onChange: (plant: InputForm['plant']) => void;
 }) => {
 	const {plant, onChange} = props;
+
+	const plants = useRecoilValue(atomPlants);
+
 	const selectedIndex = plants.findIndex(
 		({name}) => props.plant?.name === name,
 	);
@@ -24,6 +29,15 @@ export const Plants = (props: {
 				renderItem={({name}) => name}
 				selectedIndex={selectedIndex}
 				onSelect={item => onChange(item)}
+				inputProps={{
+					renderAccessoryLeft: plant?.name
+						? () => (
+								<View width="8%">
+									<Image source={{uri: plant?.image}} />
+								</View>
+						  )
+						: undefined,
+				}}
 			/>
 		</>
 	);

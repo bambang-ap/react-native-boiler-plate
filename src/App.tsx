@@ -1,14 +1,19 @@
 import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
+import {RecoilRoot} from 'recoil';
+import RecoilNexus from 'recoil-nexus';
 
-import RootNavigator from './navigators';
+import RootNavigator from '@navigators';
 
 const App = () => {
 	return (
-		<NavigationContainer>
-			<RootNavigator />
-		</NavigationContainer>
+		<RecoilRoot>
+			<RecoilNexus />
+			<NavigationContainer>
+				<RootNavigator />
+			</NavigationContainer>
+		</RecoilRoot>
 	);
 };
 

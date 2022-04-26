@@ -4,6 +4,7 @@ import {ScrollView} from 'react-native';
 import Rainbow from '@indot/rainbowvis';
 
 import criteria from '@assets/data/criteria';
+import {Texture} from '@assets/data/plants';
 import {
 	Body,
 	BoxSpace,
@@ -184,7 +185,7 @@ export const generateScores = (inputForm: InputForm) => {
 	const calcQualitative = calculateScore(
 		'soilTexture',
 		0,
-		plant.textureQualitative,
+		plant.texture.split(',') as Texture[],
 		qualitative,
 	);
 	return {

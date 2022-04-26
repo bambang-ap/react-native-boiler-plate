@@ -1,5 +1,4 @@
 import React, {useLayoutEffect} from 'react';
-import {StatusBar} from 'react-native';
 
 import RNSplashScreen from 'react-native-splash-screen';
 
@@ -9,11 +8,13 @@ import {appJson} from '@constants';
 import {COLORS} from '@constants/colors';
 import {TYPOGRAPHY} from '@constants/typography';
 import {useScreenProps} from '@hooks';
+import {plantManager} from '@utils';
 
 const SplashScreen = () => {
 	const [navigation] = useScreenProps('SplashScreen');
 
 	useLayoutEffect(() => {
+		plantManager.load();
 		RNSplashScreen.hide();
 		setTimeout(() => {
 			navigation.reset({index: 1, routes: [{name: 'FormInput'}]});
