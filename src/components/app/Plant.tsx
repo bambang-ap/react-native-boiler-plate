@@ -2,9 +2,10 @@ import React from 'react';
 
 import {useRecoilValue} from 'recoil';
 
-import {BoxSpace, Text, Select, Image, View} from '@components';
+import {BoxSpace, Text, Select, Image, View, Wrapper, Icon} from '@components';
 import {InputForm} from '@interfaces';
 import {atomPlants} from '@recoils/atom';
+import {plantManager} from '@utils';
 
 export const Plants = (props: {
 	plant: InputForm['plant'];
@@ -20,7 +21,12 @@ export const Plants = (props: {
 
 	return (
 		<>
-			<Text>Tanaman</Text>
+			<Wrapper>
+				<Text flx>Tanaman</Text>
+				<Icon name="plus" onPress={plantManager.open} />
+				<BoxSpace B />
+				<Icon name="sync" onPress={plantManager.move} />
+			</Wrapper>
 			<BoxSpace />
 			<Select
 				data={plants}
