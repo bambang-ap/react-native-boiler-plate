@@ -19,3 +19,8 @@
 - [x] Koreksi: utk judul smart dryland Agrocosystem pada halaman ke dua setelah cover depan...huruf kecilkan sdkt spy bs kelihatan semua,
 
 - [x] jg maaf mnt tlg revisi utk nilai maximal BO ( 0- 20% sj) dan utk Corg (0-10%). Ini krn tdk bs 2 digits jd kita kurangi range saja. Trmksh byk
+
+- [x] Sheet REST API
+  - [x] Dashboard: https://dashboard.steinhq.com/dashboard/apis/details/6269bca74906bb05373ed53f
+  - [x] Docs: https://github.com/orgs/SteinHQ/repositories
+  - [x] js-client sdk -> https://github.com/bambang-ap/stein-client
