@@ -1,18 +1,13 @@
 import React from 'react';
-import {StatusBar} from 'react-native';
 
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {COLORS} from '@constants/colors';
-import {InputForm} from '@interfaces';
-import Calculated from '@screens/Calculated';
-import FormInput from '@screens/FormInput';
-import SplashScreen from '@screens/SplashScreen';
+import AuthNavigator from './Auth';
+import UnAuthNavigator from './UnAuth';
 
 export type RootStackParamList = {
-	SplashScreen: undefined;
-	FormInput: undefined;
-	Calculated: InputForm;
+	UnAuth: undefined;
+	Auth: undefined;
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -20,7 +15,6 @@ const RootStack = createStackNavigator<RootStackParamList>();
 const RootNavigator = () => {
 	return (
 		<>
-			<StatusBar backgroundColor={COLORS.GREEN} barStyle="light-content" />
 			<RootStack.Navigator
 				screenOptions={{
 					headerStyle: {
@@ -31,18 +25,13 @@ const RootNavigator = () => {
 					headerTitleAlign: 'center',
 				}}>
 				<RootStack.Screen
-					name="SplashScreen"
-					component={SplashScreen}
+					name="UnAuth"
+					component={UnAuthNavigator}
 					options={{headerShown: false}}
 				/>
 				<RootStack.Screen
-					name="FormInput"
-					component={FormInput}
-					options={{headerShown: false}}
-				/>
-				<RootStack.Screen
-					name="Calculated"
-					component={Calculated}
+					name="Auth"
+					component={AuthNavigator}
 					options={{headerShown: false}}
 				/>
 			</RootStack.Navigator>

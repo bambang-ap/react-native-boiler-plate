@@ -24,3 +24,6 @@
   - [x] Dashboard: https://dashboard.steinhq.com/dashboard/apis/details/6269bca74906bb05373ed53f
   - [x] Docs: https://github.com/orgs/SteinHQ/repositories
   - [x] js-client sdk -> https://github.com/bambang-ap/stein-client
+
+- [ ] input data tanaman
+  - [ ] ada button pilih gambar ke gallery

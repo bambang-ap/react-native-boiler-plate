@@ -8,16 +8,20 @@ import {appJson} from '@constants';
 import {COLORS} from '@constants/colors';
 import {TYPOGRAPHY} from '@constants/typography';
 import {useScreenProps} from '@hooks';
+import {RootStackParamList} from '@navigators';
+import {UnAuthStackParamList} from '@navigators/UnAuth';
 import {plantManager} from '@utils';
 
 const SplashScreen = () => {
-	const [navigation] = useScreenProps('SplashScreen');
+	const [navigation] = useScreenProps<
+		UnAuthStackParamList & RootStackParamList
+	>('SplashScreen');
 
 	useLayoutEffect(() => {
 		plantManager.load();
 		RNSplashScreen.hide();
 		setTimeout(() => {
-			navigation.reset({index: 1, routes: [{name: 'FormInput'}]});
+			navigation.reset({index: 1, routes: [{name: 'Login'}]});
 		}, 2500);
 	}, []);
 
