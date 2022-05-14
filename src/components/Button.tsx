@@ -1,11 +1,13 @@
 import React, {forwardRef} from 'react';
 import {TextStyle, TouchableOpacity, TouchableOpacityProps} from 'react-native';
 
-import {Text, TextProps, ViewPropsAdditional} from '@components';
+import {Icon, Text, TextProps, ViewPropsAdditional} from '@components';
 import {COLORS} from '@constants/colors';
 import {SIZES} from '@constants/sizes';
 import {TYPOGRAPHY} from '@constants/typography';
 import {getFlexBox} from '@interfaces/flexBox.type';
+
+import Spinner from './Spinner';
 
 export enum ButtonVariant {
 	primary,
@@ -39,12 +41,15 @@ export type ButtonProps = ViewPropsAdditional &
 		variantText?: TYPOGRAPHY;
 		textProps?: Omit<TextProps, 'style' | 'variant'>;
 		textStyle?: TextStyle;
+		loading?: boolean;
 	};
 
 export const Button = forwardRef<TouchableOpacity, ButtonProps>(
 	(props, ref) => {
 		const {flexBoxStyleProps, restProps} = getFlexBox(props);
 		const {
+			loading,
+			disabled,
 			style,
 			variant,
 			children,
@@ -72,6 +77,7 @@ export const Button = forwardRef<TouchableOpacity, ButtonProps>(
 
 		return (
 			<TouchableOpacity
+				disabled={loading || disabled}
 				{...rest}
 				ref={ref}
 				style={[
@@ -87,7 +93,13 @@ export const Button = forwardRef<TouchableOpacity, ButtonProps>(
 					flexBoxStyleProps,
 					style,
 				]}>
-				{child}
+				{loading ? (
+					<Spinner>
+						<Icon color={txtColor} name="spinner" />
+					</Spinner>
+				) : (
+					child
+				)}
 			</TouchableOpacity>
 		);
 	},

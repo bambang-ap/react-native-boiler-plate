@@ -23,6 +23,7 @@ export * from './Input';
 export * from './Section';
 export * from './Slider';
 export * from './Modal';
+export * from './Spinner';
 export * from './Select';
 
 export type BgColor = {backgroundColor?: COLORS};

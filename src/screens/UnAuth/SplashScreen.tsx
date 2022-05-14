@@ -1,6 +1,7 @@
 import React, {useLayoutEffect} from 'react';
 
 import RNSplashScreen from 'react-native-splash-screen';
+import {useSetRecoilState} from 'recoil';
 
 import images from '@assets/images';
 import {Body, BoxSpace, Container, Image, Text, View} from '@components';
@@ -10,18 +11,26 @@ import {TYPOGRAPHY} from '@constants/typography';
 import {useScreenProps} from '@hooks';
 import {RootStackParamList} from '@navigators';
 import {UnAuthStackParamList} from '@navigators/UnAuth';
+import {atomAppReady, atomUser} from '@recoils/atom';
 import {plantManager} from '@utils';
+import storage from '@utils/storage';
 
 const SplashScreen = () => {
 	const [navigation] = useScreenProps<
 		UnAuthStackParamList & RootStackParamList
 	>('SplashScreen');
 
+	const setUser = useSetRecoilState(atomUser);
+	const setIsAppReady = useSetRecoilState(atomAppReady);
+
 	useLayoutEffect(() => {
 		plantManager.load();
 		RNSplashScreen.hide();
 		setTimeout(() => {
-			navigation.reset({index: 1, routes: [{name: 'Login'}]});
+			const user = storage.getUser();
+			navigation.reset({index: 1, routes: [{name: user ? 'Auth' : 'Login'}]});
+			setUser(user);
+			setIsAppReady(true);
 		}, 2500);
 	}, []);
 

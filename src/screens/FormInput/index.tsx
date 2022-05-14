@@ -15,14 +15,16 @@ import {
 	Header,
 } from '@components';
 import {Plants} from '@components/app';
+import LogoutButton from '@components/app/LogoutButton';
 import {appJson, INPUT_FORM} from '@constants';
 import {useScreenProps} from '@hooks';
 import {InputForm} from '@interfaces';
+import {AuthStackParamList} from '@navigators/Auth';
 
 import SoilTexture from './SoilTexture';
 
 const FormInput = () => {
-	const [navigation] = useScreenProps('FormInput');
+	const [navigation] = useScreenProps<AuthStackParamList>('FormInput');
 
 	const [state, setState] = useStateObject<InputForm>(INPUT_FORM);
 
@@ -30,6 +32,7 @@ const FormInput = () => {
 		<Container>
 			<Header
 				renderAccessoryLeft={noop}
+				renderAccessoryRight={LogoutButton}
 				textProps={{alignCenter: true}}
 				title={appJson.displayName}
 			/>

@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
 
 import {createStackNavigator} from '@react-navigation/stack';
+import {useRecoilValue} from 'recoil';
 
 import {COLORS} from '@constants/colors';
+import {useScreenProps} from '@hooks';
 import {InputForm} from '@interfaces';
+import {RootStackParamList} from '@navigators';
+import {atomUser} from '@recoils/atom';
 import AddPlants from '@screens/AddPlants';
 import Calculated from '@screens/Calculated';
 import FormInput from '@screens/FormInput';
@@ -18,6 +22,14 @@ export type AuthStackParamList = {
 const AuthStack = createStackNavigator<AuthStackParamList>();
 
 const AuthNavigator = () => {
+	const [navigation] = useScreenProps<RootStackParamList>('Auth');
+
+	const user = useRecoilValue(atomUser);
+
+	useEffect(() => {
+		if (!user?.id) navigation.reset({index: 1, routes: [{name: 'UnAuth'}]});
+	}, [user?.id]);
+
 	return (
 		<>
 			<StatusBar backgroundColor={COLORS.GREEN} barStyle="light-content" />

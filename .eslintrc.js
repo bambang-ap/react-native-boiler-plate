@@ -97,9 +97,10 @@ module.exports = {
 		'consistent-return': 1,
 		'no-unused-vars': 0,
 		'no-nested-ternary': 0,
-		'no-shadow': 0,
 		'no-unreachable': 1,
 		'no-console': [1, {allow: ['info']}],
+		'no-shadow': 0,
+		'@typescript-eslint/no-shadow': 0,
 		'import-helpers/order-imports': [
 			'warn',
 			{
