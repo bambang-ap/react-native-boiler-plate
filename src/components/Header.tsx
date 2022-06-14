@@ -66,5 +66,7 @@ export const TextHeader = (props: TextProps) => {
 };
 
 export const IconHeader = (props: Omit<IconProps, 'size'>) => {
-	return <Icon size={TEXT_SIZES.t_headline_4} {...props} />;
+	return (
+		<Icon color={COLORS.WHITE} size={TEXT_SIZES.t_headline_4} {...props} />
+	);
 };

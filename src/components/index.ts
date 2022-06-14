@@ -70,7 +70,8 @@ export const Container = styled(View)({
 
 export const Body = styled(View)({
 	flex: 1,
-	padding: SIZES.content,
+	paddingHorizontal: SIZES.content,
+	backgroundColor: COLORS.WHITE,
 });
 
 export const Separator = styled(View)({
@@ -104,7 +105,7 @@ export const BoxSpace = styled(View)<BoxSpaceProps>(props => {
 
 	return {
 		/** comment backgroundColor to hide spaces */
-		// backgroundColor,
+		backgroundColor,
 		width: size,
 		height: size,
 	};

@@ -8,8 +8,10 @@ import {COLORS} from '@constants/colors';
 import {useScreenProps} from '@hooks';
 import {RootStackParamList} from '@navigators';
 import {atomUser} from '@recoils/atom';
+import Cashier from '@screens/Auth/Cashier';
 
 export type AuthStackParamList = {
+	Auth: undefined;
 	Cashier: undefined;
 };
 
@@ -21,7 +23,7 @@ const AuthNavigator = () => {
 	const user = useRecoilValue(atomUser);
 
 	useEffect(() => {
-		if (!user?.id) navigation.reset({index: 1, routes: [{name: 'UnAuth'}]});
+		// if (!user?.id) navigation.reset({index: 1, routes: [{name: 'UnAuth'}]});
 	}, [user?.id]);
 
 	return (
@@ -37,10 +39,21 @@ const AuthNavigator = () => {
 						borderBottomWidth: 0,
 					},
 				}}>
-				<AuthStack.Screen name="Cashier" component={noop} />
+				<AuthStack.Screen name="Auth" component={Auth} />
+				<AuthStack.Screen name="Cashier" component={Cashier} />
 			</AuthStack.Navigator>
 		</>
 	);
 };
 
 export default AuthNavigator;
+
+const Auth = (): JSX.Element => {
+	const [navigation] = useScreenProps<AuthStackParamList, 'Auth'>();
+
+	useEffect(() => {
+		navigation.reset({index: 1, routes: [{name: 'Cashier'}]});
+	}, []);
+
+	return null;
+};
