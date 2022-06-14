@@ -11,7 +11,6 @@
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@indot/rainbowvis": "^1.0.2",
     "@react-native-community/slider": "^4.2.1",
     "@react-navigation/core": "5.16.1",
     "@react-navigation/native": "5.9.8",
