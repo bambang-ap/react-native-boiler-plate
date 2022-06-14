@@ -17,23 +17,16 @@ const RootNavigator = () => {
 		<>
 			<RootStack.Navigator
 				screenOptions={{
+					headerShown: false,
+					headerTitleAlign: 'center',
 					headerStyle: {
 						elevation: 0,
 						shadowOpacity: 0,
 						borderBottomWidth: 0,
 					},
-					headerTitleAlign: 'center',
 				}}>
-				<RootStack.Screen
-					name="UnAuth"
-					component={UnAuthNavigator}
-					options={{headerShown: false}}
-				/>
-				<RootStack.Screen
-					name="Auth"
-					component={AuthNavigator}
-					options={{headerShown: false}}
-				/>
+				<RootStack.Screen name="UnAuth" component={UnAuthNavigator} />
+				<RootStack.Screen name="Auth" component={AuthNavigator} />
 			</RootStack.Navigator>
 		</>
 	);

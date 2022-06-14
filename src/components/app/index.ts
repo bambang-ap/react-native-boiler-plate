@@ -1,1 +1,1 @@
-export * from './Plant';
+export {};
