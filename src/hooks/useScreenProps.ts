@@ -3,22 +3,28 @@ import {
 	RouteProp,
 	useNavigation,
 	useRoute,
-	ParamListBase,
 } from '@react-navigation/core';
 
 import {RootStackParamList} from '@navigators';
 import {AuthStackParamList} from '@navigators/Auth';
 import {UnAuthStackParamList} from '@navigators/UnAuth';
 
-type A = RootStackParamList | UnAuthStackParamList | AuthStackParamList;
+type Navigation<P extends StackParamLists> = NavigationProp<P>;
+type ScreenPropsRet<P extends StackParamLists, S extends keyof P> = [
+	navigation: Navigation<P>,
+	route: RouteProp<P, S>,
+];
+type StackParamLists =
+	| RootStackParamList
+	| UnAuthStackParamList
+	| AuthStackParamList;
 
-export type Navigation<F extends ParamListBase> = NavigationProp<F>;
-export type Route<F extends ParamListBase> = RouteProp<F, keyof F>;
+export const useScreenProps = <
+	P extends StackParamLists,
+	S extends keyof P,
+>(): ScreenPropsRet<P, S> => {
+	const navigation = useNavigation<NavigationProp<P>>();
+	const route = useRoute<RouteProp<P, S>>();
 
-export const useScreenProps = <S extends A>(
-	screenName: keyof S,
-): [Navigation<S>, Route<S>, keyof S] => {
-	const navigation = useNavigation<Navigation<S>>();
-	const route = useRoute<Route<S>>();
-	return [navigation, route, screenName];
+	return [navigation, route];
 };

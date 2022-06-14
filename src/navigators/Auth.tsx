@@ -6,23 +6,17 @@ import {useRecoilValue} from 'recoil';
 
 import {COLORS} from '@constants/colors';
 import {useScreenProps} from '@hooks';
-import {InputForm} from '@interfaces';
 import {RootStackParamList} from '@navigators';
 import {atomUser} from '@recoils/atom';
-import AddPlants from '@screens/AddPlants';
-import Calculated from '@screens/Calculated';
-import FormInput from '@screens/FormInput';
 
 export type AuthStackParamList = {
-	FormInput: undefined;
-	Calculated: InputForm;
-	AddPlants: undefined;
+	Cashier: undefined;
 };
 
 const AuthStack = createStackNavigator<AuthStackParamList>();
 
 const AuthNavigator = () => {
-	const [navigation] = useScreenProps<RootStackParamList>('Auth');
+	const [navigation] = useScreenProps<RootStackParamList, 'Auth'>();
 
 	const user = useRecoilValue(atomUser);
 
@@ -35,28 +29,15 @@ const AuthNavigator = () => {
 			<StatusBar backgroundColor={COLORS.GREEN} barStyle="light-content" />
 			<AuthStack.Navigator
 				screenOptions={{
+					headerShown: false,
+					headerTitleAlign: 'center',
 					headerStyle: {
 						elevation: 0,
 						shadowOpacity: 0,
 						borderBottomWidth: 0,
 					},
-					headerTitleAlign: 'center',
 				}}>
-				<AuthStack.Screen
-					name="FormInput"
-					component={FormInput}
-					options={{headerShown: false}}
-				/>
-				<AuthStack.Screen
-					name="Calculated"
-					component={Calculated}
-					options={{headerShown: false}}
-				/>
-				<AuthStack.Screen
-					name="AddPlants"
-					component={AddPlants}
-					options={{headerShown: false}}
-				/>
+				<AuthStack.Screen name="Cashier" component={noop} />
 			</AuthStack.Navigator>
 		</>
 	);

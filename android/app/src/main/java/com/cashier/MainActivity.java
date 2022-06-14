@@ -1,4 +1,4 @@
-package com.sdae;
+package com.cashier;
 
 import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen; 
@@ -19,6 +19,6 @@ public class MainActivity extends ReactActivity {
 
   @Override
   protected String getMainComponentName() {
-    return "SDAe";
+    return "Cashier";
   }
 }

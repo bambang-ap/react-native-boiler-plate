@@ -888,11 +888,6 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@indot/rainbowvis@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@indot/rainbowvis/-/rainbowvis-1.0.2.tgz#20f7360a4bf889f62df06eb14cec1b8439e45dda"
-  integrity sha512-1WCIxnxYC6QT5xHxFlAxxADaFAq+Z4FpW0/nR68V5oKyp6QeU0ZNGSveBXLcpOhemt/Q3Aqs8B2UOHCbnpXlXA==
-
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -6227,6 +6222,10 @@ react-native@0.66.4:
     use-subscription "^1.0.0"
     whatwg-fetch "^3.0.0"
     ws "^6.1.4"
+
+react-navigation-transition-effect@bambang-ap/react-navigation-transition-effect#1.0.0:
+  version "1.0.0"
+  resolved "https://codeload.github.com/bambang-ap/react-navigation-transition-effect/tar.gz/5409393cf86aec647e1a6b2b2f7e47d4c250f5c0"
 
 react-refresh@^0.4.0:
   version "0.4.3"

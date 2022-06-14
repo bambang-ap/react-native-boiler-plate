@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "SDAe.app"
-               BlueprintName = "SDAe"
-               ReferencedContainer = "container:SDAe.xcodeproj">
+               BuildableName = "Cashier.app"
+               BlueprintName = "Cashier"
+               ReferencedContainer = "container:Cashier.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "SDAeTests.xctest"
-               BlueprintName = "SDAeTests"
-               ReferencedContainer = "container:SDAe.xcodeproj">
+               BuildableName = "CashierTests.xctest"
+               BlueprintName = "CashierTests"
+               ReferencedContainer = "container:Cashier.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "SDAe.app"
-            BlueprintName = "SDAe"
-            ReferencedContainer = "container:SDAe.xcodeproj">
+            BuildableName = "Cashier.app"
+            BlueprintName = "Cashier"
+            ReferencedContainer = "container:Cashier.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "SDAe.app"
-            BlueprintName = "SDAe"
-            ReferencedContainer = "container:SDAe.xcodeproj">
+            BuildableName = "Cashier.app"
+            BlueprintName = "Cashier"
+            ReferencedContainer = "container:Cashier.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
