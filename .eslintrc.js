@@ -100,6 +100,7 @@ module.exports = {
 		'no-unreachable': 1,
 		'no-console': [1, {allow: ['info']}],
 		'no-shadow': 0,
+		'no-fallthrough': 0,
 		'@typescript-eslint/no-shadow': 0,
 		'import-helpers/order-imports': [
 			'warn',

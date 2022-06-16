@@ -30,7 +30,7 @@ const ListItems = () => {
 									<Text>Stok : 21 Pcs</Text>
 								</View>
 								<TouchableWithoutFeedback>
-									<Wrapper flx={0.2} height="100%" itemsCenter>
+									<Wrapper height="100%" itemsCenter>
 										<BoxSpace />
 										<Icon onPress={noop} name="minus" />
 										<BoxSpace />

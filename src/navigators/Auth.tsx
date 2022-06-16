@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
 
 import {createStackNavigator} from '@react-navigation/stack';
+import {fromRight} from 'react-navigation-transition-effect';
 import {useRecoilValue} from 'recoil';
 
 import {COLORS} from '@constants/colors';
@@ -9,10 +10,11 @@ import {useScreenProps} from '@hooks';
 import {RootStackParamList} from '@navigators';
 import {atomUser} from '@recoils/atom';
 import Cashier from '@screens/Auth/Cashier';
+import Cashout from '@screens/Auth/Cashout';
 
 export type AuthStackParamList = {
-	Auth: undefined;
 	Cashier: undefined;
+	Cashout: undefined;
 };
 
 const AuthStack = createStackNavigator<AuthStackParamList>();
@@ -38,22 +40,13 @@ const AuthNavigator = () => {
 						shadowOpacity: 0,
 						borderBottomWidth: 0,
 					},
+					...fromRight(),
 				}}>
-				<AuthStack.Screen name="Auth" component={Auth} />
 				<AuthStack.Screen name="Cashier" component={Cashier} />
+				<AuthStack.Screen name="Cashout" component={Cashout} />
 			</AuthStack.Navigator>
 		</>
 	);
 };
 
 export default AuthNavigator;
-
-const Auth = (): JSX.Element => {
-	const [navigation] = useScreenProps<AuthStackParamList, 'Auth'>();
-
-	useEffect(() => {
-		navigation.reset({index: 1, routes: [{name: 'Cashier'}]});
-	}, []);
-
-	return null;
-};

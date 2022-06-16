@@ -1,11 +1,15 @@
 import React from 'react';
-import {TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 
 import {BoxSpace, Button, Icon, Text, Wrapper} from '@components';
-import {COLORS, SIZES} from '@constants';
+import {COLORS} from '@constants';
+import {useScreenProps} from '@hooks';
+import {AuthStackParamList} from '@navigators/Auth';
 import {globalStyles} from '@utils/styles';
 
 const CartButton = () => {
+	const [navigation] = useScreenProps<AuthStackParamList, 'Cashier'>();
+
 	return (
 		<>
 			<BoxSpace A />
@@ -25,7 +29,7 @@ const CartButton = () => {
 				</Wrapper>
 			</TouchableOpacity>
 			<BoxSpace />
-			<Button>Lanjut</Button>
+			<Button onPress={() => navigation.navigate('Cashout')}>Lanjut</Button>
 		</>
 	);
 };

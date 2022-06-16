@@ -6,7 +6,6 @@ import {
 	Header,
 	TextHeader,
 	Wrapper,
-	Icon,
 	BoxSpace,
 	IconHeader,
 } from '@components';
@@ -22,13 +21,13 @@ const Cashier = () => {
 				renderAccessoryLeft={() => <IconHeader name="bars" />}
 				renderAccessoryRight={() => (
 					<Wrapper>
-						<IconHeader name="plus" />
-						<BoxSpace />
 						<IconHeader name="barcode" />
+						<BoxSpace />
+						<IconHeader name="plus" />
 					</Wrapper>
 				)}>
 				<TextHeader color={COLORS.WHITE} flx alignCenter>
-					Cashier
+					Kasir
 				</TextHeader>
 			</Header>
 			<Body>

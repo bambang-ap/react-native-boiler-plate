@@ -8,7 +8,7 @@ import UnAuthNavigator from './UnAuth';
 
 export type RootStackParamList = {
 	UnAuth: undefined;
-	Auth: {y: string};
+	Auth: undefined;
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
